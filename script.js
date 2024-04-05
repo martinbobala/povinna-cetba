@@ -1,18 +1,28 @@
+let otpValue
+
 function drawAlert(text) {
   alert(text)
 }
-
-
 
 function sendOtp() {
   
   let emailAlreadySent = false
 
-  document.getElementById("otp_btn").addEventListener("click", function () {
+  document.getElementById("otpButton").addEventListener("click", function () {
+
+    function generateOTP() {
+      const digits = 6
+      const min = Math.pow(10, digits - 1)
+      const max = Math.pow(10, digits) - 1 
+      return Math.floor(Math.random() * (max - min + 1)) + min
+      
+    }
 
     const email = document.getElementById("email")
-    let otpValue = Math.floor(Math.random()* 10000)
-    let emailbody = `<h2>Your OTP is </h2>${otpValue}`
+    otpValue = generateOTP()
+  
+    
+    let emailbody = "<h2>Your OTP is </h2>" + otpValue
     
     function validateEmail(email) {
       
@@ -52,12 +62,30 @@ function sendOtp() {
   
 }
 
+function submitForm(){
+  document.getElementById("form").addEventListener("submit", function() {
 
+    let otpUserInput = document.getElementById("otpInput").value
+    
+    if (otpUserInput === otpValue) {
+    console.log("negri prej nekradou a ja videl tri ja v kurici jsou ");
+    
+    }
+    else{
+    console.log("chyba se bloudil");
+    }
+
+
+
+
+  }) 
+}
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  sendOtp()
  
+  sendOtp()
+  submitForm()
   
 })
 
