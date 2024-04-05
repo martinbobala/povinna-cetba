@@ -14,29 +14,26 @@ function sendOtp() {
     
     function validateEmail(email) {
       
-      var emailPattern = /^[a-z]+\.[a-z]+@tznj\.cz$/
-
-
-
-
-
-
-
-
-      console.log(emailPattern.test(email.value))
+      let emailPattern = /^[a-z]+\.[a-z]+@tznj\.cz$/
+      let emailAlreadySent = false
       
-      if (emailPattern.test(email.value)) {
+      if (emailPattern.test(email.value) && emailAlreadySent === false) {
 
-          return true; 
+        drawAlert("E-mail byl úspěšně odeslán na adresu " + email.value + ". Prosím, zkontrolujte složku s nevyžádanou poštou spam, pokud e-mail není v doručené poště.")
+          return true
 
+      } else if(emailAlreadySent === true){
+
+        drawAlert("E-mail již byl úspěšně odeslán. Prosím, zkontrolujte složku s nevyžádanou poštou (spam), pokud e-mail není v doručené poště.")
+        return false
+    
       } else {
 
           drawAlert("Zadaný email není platný nebo nepatří do domény tznj.cz ve správném formátu. Zkontrolujte prosím svůj vstup a zkuste to znovu.");
-          return false;
+          return false
       }
     }
   
-
     if (validateEmail(email)) {
       
       Email.send({
@@ -45,17 +42,15 @@ function sendOtp() {
         From : "martin.bobala@tznj.cz",
         Subject : "Ověřovací kód",
         Body : emailbody}).then(
-        message => alert(message));
+        message => console.log(message));
 
     }
-
-
-
-    
    
-        
   })
 }
+
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
   sendOtp()
