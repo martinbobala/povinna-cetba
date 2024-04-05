@@ -4,6 +4,10 @@ function drawAlert(text) {
   alert(text)
 }
 
+function makeBookList() {
+  
+}
+
 function sendOtp() {
   
   let emailAlreadySent = false
@@ -66,9 +70,9 @@ function submitForm(){
   document.getElementById("form").addEventListener("submit", function() {
 
     let otpUserInput = document.getElementById("otpInput").value
-    
+
     if (otpUserInput === otpValue) {
-    console.log("negri prej nekradou a ja videl tri ja v kurici jsou ");
+    console.log("tigri prej nekradou a ja videl tri ja v kurici jsou ");
     
     }
     else{
