@@ -1,26 +1,28 @@
-function drawAlert(params) {
-  alert(params)
+function drawAlert(text) {
+  alert(text)
 }
 
 
 
 function sendOtp() {
   
+  let emailAlreadySent = false
+
   document.getElementById("otp_btn").addEventListener("click", function () {
 
     const email = document.getElementById("email")
-    let otp_val = Math.floor(Math.random()* 10000)
-    let emailbody = `<h2>Your OTP is </h2>${otp_val}`
+    let otpValue = Math.floor(Math.random()* 10000)
+    let emailbody = `<h2>Your OTP is </h2>${otpValue}`
     
     function validateEmail(email) {
       
       let emailPattern = /^[a-z]+\.[a-z]+@tznj\.cz$/
-      let emailAlreadySent = false
       
       if (emailPattern.test(email.value) && emailAlreadySent === false) {
 
         drawAlert("E-mail byl úspěšně odeslán na adresu " + email.value + ". Prosím, zkontrolujte složku s nevyžádanou poštou spam, pokud e-mail není v doručené poště.")
-          return true
+        emailAlreadySent = true
+        return true
 
       } else if(emailAlreadySent === true){
 
@@ -29,8 +31,8 @@ function sendOtp() {
     
       } else {
 
-          drawAlert("Zadaný email není platný nebo nepatří do domény tznj.cz ve správném formátu. Zkontrolujte prosím svůj vstup a zkuste to znovu.");
-          return false
+        drawAlert("Zadaný email není platný nebo nepatří do domény tznj.cz ve správném formátu. Zkontrolujte prosím svůj vstup a zkuste to znovu.");
+        return false
       }
     }
   
@@ -47,6 +49,7 @@ function sendOtp() {
     }
    
   })
+  
 }
 
 
@@ -54,5 +57,9 @@ function sendOtp() {
 
 document.addEventListener("DOMContentLoaded", function() {
   sendOtp()
+ 
   
 })
+
+
+
