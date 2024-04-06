@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link
-      rel="stylesheet" 
-    />
+    
+    <link rel="stylesheet" href="style.css">
+    <script defer src="./script.js"></script>
+
   </head>
   <body>
     
-          <script src="./script.js"></script>
-          <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     
-          <h1 class="title">Povinná četba</h1>
+    <h1 class="title">Povinná četba</h1>
           
           
-          <input type="text" id="otpInput" placeholder="Enter the OTP">
-          <button class="button" id="otpButton">Send OTP</button>
+    <input type="text" id="otp_inp" placeholder="Enter the OTP">
+    <button class="button" id="otpButtob">Send OTP</button>
     <form id="form" class="container m-4 pl-4" method="POST"> 
-        <label class="label">Email</label>
-        <input class="input" type="email" placeholder="Your Email" name="Email" id="email"/>
+    <label class="label">Email</label>
+    <input class="input" type="email" placeholder="Your Email" name="Email" id="email"/>
       
+    <h2>Světová a česká literatura do konce 18. století</h2>  
+      
+    <ul> 
+     <li><input type="checkbox" name="bible" value="Bible">Bible</li>
+     <li><input type="checkbox" name="dekameron" value="Dekameron">Dekameron   Giovanni Boccaccio</li>
+     <li><input type="checkbox" name="kronika" value="Dalimil Kronika tak řečeného Dalimila">Dalimil Kronika tak řečeného Dalimila</li>
+     <li><input type="checkbox" name="diderot" value="Denis Diderot Jeptiška">Denis Diderot Jeptiška</li>
+     <li><input type="checkbox" name="werther" value="Johann Wolfgang Goethe Utrpení mladého Werthera">Johann Wolfgang Goethe Utrpení mladého Werthera</li>
+     <li><input type="checkbox" name="odysseia" value="Homér Odysseia">Homér Odysseia</li>
+     <li><input type="checkbox" name="kronika_ceska" value="Kosmas Kronika česká">Kosmas Kronika česká</li>
+     <li><input type="checkbox" name="lakomec" value="Moliére Lakomec">Moliére Lakomec</li>
+     <li><input type="checkbox" name="hamlet" value="William Shakespeare Hamlet">William Shakespeare Hamlet</li>
+     <li><input type="checkbox" name="romeo_a_julie" value="William Shakespeare Romeo a Julie">William Shakespeare Romeo a Julie</li>
+    </ul>
 
+
+
+ 
       
-      <div class="field is-grouped">
-        <div class="control">
-          <button class="button is-primary" type="submit" id="submit-button">
+      
+      
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="button is-primary" type="submit" id="submit-button">
             Sign Up
-          </button>
+        </button>
 
     </form>
     <div

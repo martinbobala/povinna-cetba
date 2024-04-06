@@ -4,9 +4,7 @@ function drawAlert(text) {
   alert(text)
 }
 
-function makeBookList() {
-  
-}
+
 
 function sendOtp() {
   
@@ -90,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
  
   sendOtp()
   submitForm()
-  
+ 
 })
 
 
