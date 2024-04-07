@@ -8,15 +8,9 @@ function makeBookList() {
 
 // Funkce pro generování seznamu v HTML
 function generateBookList() {
-  let htmlCode = "<ul>\n";
-  for (let i = 0; i < booksAuthors.length; i++) {
-      let book = booksAuthors[i][0];
-      let author = booksAuthors[i][1];
-      let lowercaseBook = book.toLowerCase().replace(/\s+/g, '_');
-      htmlCode += `<li><input type='checkbox' name='${lowercaseBook}' value='${book}'><span class="book">${book}</span> <span class="author">${author}</span></li>\n`;
-  }
-  htmlCode += "</ul>";
-  return htmlCode;
+
+  fetch("https://script.google.com/a/macros/tznj.cz/s/AKfycbwcnwHAjGUjS5OIApbrkRqbuqhIqE_B9MriFo3ofsQqftPAhi4hGcbYFNetHz1XLP4w/exec")
+    .then(res=> console.log(res.json()))
 }
 
 // Generování seznamu knih a autorů
