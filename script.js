@@ -4,6 +4,29 @@ function drawAlert(text) {
   alert(text)
 }
 
+function makeBookList() {
+
+// Funkce pro generování seznamu v HTML
+function generateBookList() {
+  let htmlCode = "<ul>\n";
+  for (let i = 0; i < booksAuthors.length; i++) {
+      let book = booksAuthors[i][0];
+      let author = booksAuthors[i][1];
+      let lowercaseBook = book.toLowerCase().replace(/\s+/g, '_');
+      htmlCode += `<li><input type='checkbox' name='${lowercaseBook}' value='${book}'><span class="book">${book}</span> <span class="author">${author}</span></li>\n`;
+  }
+  htmlCode += "</ul>";
+  return htmlCode;
+}
+
+// Generování seznamu knih a autorů
+const bookList = generateBookList();
+
+// Vložení seznamu do konkrétního kontejneru
+document.getElementById('bookListContainer').innerHTML = bookList;
+
+
+}
 
 
 function sendOtp() {
@@ -86,10 +109,12 @@ function submitForm(){
 
 document.addEventListener("DOMContentLoaded", function() {
  
+  makeBookList()
   sendOtp()
   submitForm()
  
 })
+
 
 
 
