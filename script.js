@@ -6,18 +6,24 @@ function drawAlert(text) {
 
 function makeBookList() {
 
-// Funkce pro generování seznamu v HTML
-function generateBookList() {
-
   fetch("https://script.google.com/a/macros/tznj.cz/s/AKfycbwcnwHAjGUjS5OIApbrkRqbuqhIqE_B9MriFo3ofsQqftPAhi4hGcbYFNetHz1XLP4w/exec")
-    .then(res=> console.log(res.json()))
-}
+    .then(res=> res.json())
+    .then(data => {
+      
+      let bookObjects = data.data
 
-// Generování seznamu knih a autorů
-const bookList = generateBookList();
+      
+      
 
-// Vložení seznamu do konkrétního kontejneru
-document.getElementById('bookListContainer').innerHTML = bookList;
+
+    })
+
+
+
+
+
+  // Vložení seznamu do konkrétního kontejneru
+  document.getElementById('bookListContainer').innerHTML = bookList;
 
 
 }
@@ -100,7 +106,6 @@ function submitForm(){
   }) 
 }
 
-
 document.addEventListener("DOMContentLoaded", function() {
  
   makeBookList()
@@ -108,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
   submitForm()
  
 })
+
 
 
 
