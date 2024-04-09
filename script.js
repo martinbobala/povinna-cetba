@@ -17,11 +17,10 @@ function makeBookList() {
         const listItem = document.createElement('li')
         
         listItem.innerHTML = `<input type='checkbox' value='${book.name}'><span class="book">${book.name}</span> <span class="author">${book.autor}</span>`
-        
-        console.log(book.category)
-        document.getElementById(book.category).append(listItem)
+       
+        //document.getElementsById(book.category).append(listItem)
       })
-      
+
     })
 
 
@@ -88,18 +87,15 @@ function sendOtp() {
 function submitForm(){
   document.getElementById("form").addEventListener("submit", function() {
 
-    let otpUserInput = document.getElementById("otpInput").value
-
-    if (otpUserInput === otpValue) {
-    console.log("tigri prej nekradou a ja videl tri ja v kurici jsou ");
-    
+    //let otpUserInput = document.getElementById("otpInput").value
+  
+    let formData = new FormData(this);
+    let keyValuePairs = [];
+    for (let [name , value] of formData.entries()) {
+      console.log(value);
+      keyValuePairs.push(value)
+      
     }
-    else{
-    console.log("chyba se bloudil");
-    }
-
-
-
 
   }) 
 }

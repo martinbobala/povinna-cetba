@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seznam knih</title>
+  <style>
+    /* Box kolem seznamu knih */
+    .book-list {
+      border: 1px solid #ccc; /* Tlustost a barva okraje */
+      padding: 20px; /* Vnější mezera uvnitř boxu */
+      border-radius: 10px; /* Zakulacené rohy */
+      width: fit-content; /* Šířka boxu odpovídající obsahu */
+    }
+
+    /* Rozdělení sloupců pomocí flexboxu */
+    ul {
+      display: flex;
+      flex-direction: column; /* Sloupce */
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      justify-content: space-between; /* Zarovnání obsahu na okraje sloupce */
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="book-list"> <!-- Box kolem seznamu knih -->
+    <ul>
+      <li><input type="checkbox" name="kronika" value="Dalimil Kronika tak řečeného Dalimila"><span>Dalimil Kronika tak řečeného Dalimila</span><span>Dalimil</span></li>
+      <li><input type="checkbox" name="diderot" value="Denis Diderot Jeptiška"><span>Denis Diderot Jeptiška</span><span>Denis Diderot</span></li>
+      <!-- Zde pokračujte s dalšími knihami -->
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+.book {
+    font-weight: bold;
+    /* Další styly pro název knihy */
+}
+
+
+
+.author {
+    font-style: italic;
+    /* Další styly pro jméno autora */
+}
