@@ -5,29 +5,27 @@ function drawAlert(text) {
 }
 
 function makeBookList() {
-
-  fetch("https://script.google.com/a/macros/tznj.cz/s/AKfycbwcnwHAjGUjS5OIApbrkRqbuqhIqE_B9MriFo3ofsQqftPAhi4hGcbYFNetHz1XLP4w/exec")
+  
+  fetch("https://script.google.com/macros/s/AKfycbwcnwHAjGUjS5OIApbrkRqbuqhIqE_B9MriFo3ofsQqftPAhi4hGcbYFNetHz1XLP4w/exec")
     .then(res=> res.json())
     .then(data => {
-      
-      let bookObjects = data.data
 
+      let bookData = data.data
       
+      bookData.forEach(book => {
+
+        const listItem = document.createElement('li')
+        
+        listItem.innerHTML = `<input type='checkbox' value='${book.name}'><span class="book">${book.name}</span> <span class="author">${book.autor}</span>`
+        
+        console.log(book.category)
+        document.getElementById(book.category).append(listItem)
+      })
       
-
-
     })
 
 
-
-
-
-  // Vložení seznamu do konkrétního kontejneru
-  document.getElementById('bookListContainer').innerHTML = bookList;
-
-
 }
-
 
 function sendOtp() {
   
@@ -108,12 +106,13 @@ function submitForm(){
 
 document.addEventListener("DOMContentLoaded", function() {
  
-  makeBookList()
   sendOtp()
   submitForm()
- 
+  
 })
 
+
+makeBookList()
 
 
 
