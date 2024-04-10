@@ -9,16 +9,23 @@ function makeBookList() {
   fetch("https://script.google.com/macros/s/AKfycbwcnwHAjGUjS5OIApbrkRqbuqhIqE_B9MriFo3ofsQqftPAhi4hGcbYFNetHz1XLP4w/exec")
     .then(res=> res.json())
     .then(data => {
-
+      
       let bookData = data.data
       
       bookData.forEach(book => {
 
-        const listItem = document.createElement('li')
+        if (book.genre !== "" || book.category !== "") {
+          
+          const listItem = document.createElement('li')
         
-        listItem.innerHTML = `<input type='checkbox' value='${book.name}'><span class="book">${book.name}</span> <span class="author">${book.autor}</span>`
-       
-        //document.getElementsById(book.category).append(listItem)
+          listItem.innerHTML = `<input type='checkbox' value='${book.name}'><span class="book">${book.name}</span> <span class="author">${book.autor}</span>`
+          console.log(book.category);
+          document.getElementById(book.category).appendChild(listItem);
+        }
+
+        else{
+          console.log("Chybí kategorie nebo žánr Knihy, Prosím zkontrolujte Google tabulku povinna cetba a jeji hodnoty u knihy " + book.name )
+        }
       })
 
     })
