@@ -19,7 +19,7 @@ function makeBookList() {
           const listItem = document.createElement('li')
         
           listItem.innerHTML = `<input type='checkbox' value='${book.name}'><span class="book">${book.name}</span> <span class="author">${book.autor}</span>`
-          console.log(book.category);
+          
           document.getElementById(book.category).appendChild(listItem);
         }
 
@@ -94,15 +94,41 @@ function sendOtp() {
 function submitForm(){
   document.getElementById("form").addEventListener("submit", function() {
 
-    //let otpUserInput = document.getElementById("otpInput").value
+    function sendDataToSheets(formDataString) {
+
+      fetch(
+        "https://script.google.com/macros/s/AKfycbwVND3ufXn-_-jGzNjhbXI5USI6xuN6QlEvx-HGgfv42o2L96SDdeLcx_ZGrzPkyEL7/exec",
+        {
+          redirect: "follow",
+          method: "POST",
+          body: formDataString,
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+        }
+      )
+        .then(function (response) {
+          
+          if (response) {
+            console.log("odeslano");
+            return response;
+          } else {
+            throw new Error("Failed to submit the form.");
+          }
+        })
+    }
+   
+    // check let otpUserInput = document.getElementById("otpInput").value
   
     let formData = new FormData(this);
-    let keyValuePairs = [];
-    for (let [name , value] of formData.entries()) {
-      console.log(value);
-      keyValuePairs.push(value)
-      
+    for (let [name, value] of formData.entries()) {
+      console.log(`${name}: ${value}`);
     }
+    
+    let checkboxes = document.querySelectorAll('#form ul input[type="checkbox"]:checked');
+    checkboxes.forEach(function(checkbox) {
+        console.log(checkbox.value);
+    })
 
   }) 
 }
