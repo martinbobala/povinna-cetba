@@ -4,51 +4,45 @@
     
     <link rel="stylesheet" href="style.css">
     <script async src="./script.js"></script>
-
+    
   </head>
   <body>
     
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     
     <h1 class="title">Povinná četba</h1>
-          
-          
-    <input type="text" id="otp_inp" placeholder="Enter the OTP">
-    <button class="button" id="otpButton">Send OTP</button>
-    <form id="form" class="container m-4 pl-4" method="POST"> 
-    <label class="label">Email</label>
-    <input class="input" type="email" placeholder="Your Email" name="Email" id="email"/>
-      
-    <ul id = "Světová a česká literatura do konce 18. století">
-      <h2>Světová a česká literatura do konce 18. století</h2>  
-    </ul>
-
-    <ul id = "Světová a česká literatura 19. století">
-      <h2>Světová a česká literatura 19. století</h2>
-    </ul>
-
-    <ul id = "Světová literatura 20. a 21. století">
-      <h2>Světová literatura 20. a 21. století</h2>
-    </ul>
-
-    <ul id = "Česká literatura 20. a 21. století">
-      <h2>Česká literatura 20. a 21. století</h2>
-    </ul>
-
     
-
- 
-      
-      
-      
-    <div class="field is-grouped">
-      <div class="control">
-        <button class="button is-primary" type="submit" id="submit-button">
-            Sign Up
-        </button>
-
+    <form id="form" class="container m-4 pl-4" method="POST"> 
+    
+      <ul id = "Světová a česká literatura do konce 18. století">
+        <h2>Světová a česká literatura do konce 18. století - minimálně 2 díla</h2>  
+      </ul>
+    
+      <ul id = "Světová a česká literatura 19. století">
+        <h2>Světová a česká literatura 19. století  minimálně 3 díla </h2>
+      </ul>
+    
+      <ul id = "Světová literatura 20. a 21. století">
+        <h2>Světová literatura 20. a 21. století - minimálně 4 díla</h2>
+      </ul>
+    
+      <ul id = "Česká literatura 20. a 21. století">
+        <h2>Česká literatura 20. a 21. století - minimálně 5 děl</h2>
+      </ul>
+    
+    
+    
+      <input type="text" id="otp_inp" placeholder="Enter the OTP">
+      <button class="button" id="otpButton">Send OTP</button>
+      <label class="label">Email</label>
+      <input class="input" type="email" placeholder="Your Email" name="Email" id="email"/>
+    
+      <button type ="button">stahnou virus</button>
+      <button type ="submit">poslat list</button>
+        
     </form>
-    <div
+
+      <div
       id="message"
       style="
         display: none;
