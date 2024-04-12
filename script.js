@@ -1,4 +1,5 @@
 let otpValue
+let email
 
 function drawAlert(text) {
   alert(text)
@@ -47,7 +48,7 @@ function sendOtp() {
       
     }
 
-    const email = document.getElementById("email")
+    email = document.getElementById("email")
     otpValue = generateOTP()
   
     
@@ -92,44 +93,32 @@ function sendOtp() {
 }
 
 function submitForm(){
-  document.getElementById("form").addEventListener("submit", function() {
+  document.getElementById("form").addEventListener("submit", function(e) {
+    e.preventDefault()
 
-    function sendDataToSheets(formDataString) {
+    function extractNameFromEmail() {
+      try {let parts = email.split('@');
+      let nameParts = parts[0].split('.');
+      let fullName = nameParts.map(function(part) {
 
-      fetch(
-        "https://script.google.com/macros/s/AKfycbwVND3ufXn-_-jGzNjhbXI5USI6xuN6QlEvx-HGgfv42o2L96SDdeLcx_ZGrzPkyEL7/exec",
-        {
-          redirect: "follow",
-          method: "POST",
-          body: formDataString,
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8",
-          },
-        }
-      )
-        .then(function (response) {
-          
-          if (response) {
-            console.log("odeslano");
-            return response;
-          } else {
-            throw new Error("Failed to submit the form.");
-          }
-        })
+      return part.charAt(0).toUpperCase() + part.slice(1)}).join(' ')
+      return fullName;
+      }
+      catch(err){
+        console.log("email jeste nebyl definova bo neni povrzeny");
+      }
+      
     }
-   
+      
     // check let otpUserInput = document.getElementById("otpInput").value
-  
-    let formData = new FormData(this);
-    for (let [name, value] of formData.entries()) {
-      console.log(`${name}: ${value}`);
-    }
+    console.log(extractNameFromEmail());
+
     
     let checkboxes = document.querySelectorAll('#form ul input[type="checkbox"]:checked');
     checkboxes.forEach(function(checkbox) {
         console.log(checkbox.value);
     })
-
+      console.log("ahnmeduk");
   }) 
 }
 
