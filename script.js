@@ -19,7 +19,7 @@ function makeBookList() {
           
           const listItem = document.createElement('li')
         
-          listItem.innerHTML = `<input type='checkbox' value='${book.name}'><span class="book">${book.name}</span> <span class="author">${book.autor}</span>`
+          listItem.innerHTML = `<input type='checkbox' value='${book.name}'><span class="book">${book.name}</span> <span class="author">${book.autor}(${book.genre})</span>`
           
           document.getElementById(book.category).appendChild(listItem);
         }
@@ -28,6 +28,8 @@ function makeBookList() {
           console.log("Chybí kategorie nebo žánr Knihy, Prosím zkontrolujte Google tabulku povinna cetba a jeji hodnoty u knihy " + book.name )
         }
       })
+
+      onCheckboxChange()
 
     })
 
@@ -92,6 +94,41 @@ function sendOtp() {
   
 }
 
+function onCheckboxChange() {
+    
+  let checkedCheckboxes = [];
+  
+  
+  function handleCheckboxChange(event) {
+    
+    const checkboxValue = event.target.value
+    
+    
+    if (event.target.checked) {
+      
+      checkedCheckboxes.push(checkboxValue);
+    } else {
+      
+      const index = checkedCheckboxes.indexOf(checkboxValue)
+      if (index !== -1) {
+        checkedCheckboxes.splice(index, 1)
+      }
+    }
+    
+    
+    console.log("Checked checkboxes:", checkedCheckboxes)
+  }
+  
+  
+  const checkBoxes = document.querySelectorAll('input[type="checkbox"]')
+  
+  checkBoxes.forEach(checkbox => {
+    checkbox.addEventListener("change", handleCheckboxChange)
+    
+  })
+  
+}
+
 function submitForm(){
   document.getElementById("form").addEventListener("submit", function(e) {
     e.preventDefault()
@@ -105,28 +142,34 @@ function submitForm(){
       return fullName;
       }
       catch(err){
-        console.log("email jeste nebyl definova bo neni povrzeny");
+        console.log("email jeste nebyl definovan bo neni potvrzeny");
       }
-      
+
     }
       
-    // check let otpUserInput = document.getElementById("otpInput").value
-    console.log(extractNameFromEmail());
-
+    const criteria = [
+      { name: "World literature (20th and 21st century)", count: 4, currentCount: 0 },
+      { name: "Czech literature (20th and 21st century)", count: 5, currentCount: 0 },
+      { name: "World and Czech literature (19th century)", count: 3, currentCount: 0 },
+      { name: "World and Czech literature (up to 18th century)", count: 2, currentCount: 0 },
+      { name: "Minimum prose count", count: 2, currentCount: 0 },
+      { name: "Minimum poetry count", count: 2, currentCount: 0 },
+      { name: "Minimum drama count", count: 2, currentCount: 0 },
+      { name: "Minimum total books count", count: 20, currentCount: 0 },
+    ]
     
-    let checkboxes = document.querySelectorAll('#form ul input[type="checkbox"]:checked');
-    checkboxes.forEach(function(checkbox) {
-        console.log(checkbox.value);
-    })
-      console.log("ahnmeduk");
+    let missingCriteria = [];
+
+
+
   }) 
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+  
  
   sendOtp()
   submitForm()
-  
 })
 
 
