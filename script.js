@@ -11,6 +11,7 @@ const criteria = [
   { name: "poesie", count: 2, currentCount: 0 },
   { name: "drama", count: 2, currentCount: 0 },
   { name: "počet knih", count: 20, currentCount: 0 },
+  { name: "autoři", currentCount: []},
 ]
 
 
@@ -114,48 +115,61 @@ function getObjectByName(name, arr) {
 
 function onCheckboxChange() {
   
-  let checkedCheckboxes = [];
-  
-  
+   
   function handleCheckboxChange(event) {
     
-    const checkBoxValue = event.target.value
+    const book = getObjectByName(event.target.value, bookList)
+
+    const genreCriterium = getObjectByName(book.genre, criteria)
+    const categoryCriterium = getObjectByName(book.category, criteria)
+    const countCriterium = getObjectByName("počet knih", criteria)
+
+    const autorCriterium = getObjectByName("autoři", criteria)
+    const autorArr = autorCriterium.currentCount
+
+    const criteriaArr = [genreCriterium, categoryCriterium, countCriterium]
     
+
+    function removeData(){
+      const index = autorArr.indexOf(book.autor);
+        if (index !== -1) {
+          autorArr.splice(index, 1)
+        }
+    
+      criteriaArr.forEach(criterum =>{
+
+        criterum.currentCount -= 1
+      })
+
+    }
     
     if (event.target.checked) {
       
-      const book = getObjectByName(checkBoxValue, bookList)
+      autorArr.push(book.autor)
 
-      const genreCriterium = getObjectByName(book.genre, criteria)
-      const categoryCriterium = getObjectByName(book.category, criteria)
-      const countCriterium = getObjectByName("počet knih", criteria)
-
-      const criteriaArr = [genreCriterium, categoryCriterium, countCriterium]
-      
       criteriaArr.forEach(criterum =>{
 
-        criterum.currentCount =+ 1
-
+        criterum.currentCount += 1
       })
       
-     
-      console.log(criteriaArr);
-      
-      
-      
-      checkedCheckboxes.push(checkBoxValue)
+      const count = {}
+
+      autorArr.forEach(autor => {
+        count[autor] = (count[autor] || 0) +1
+        if (count[autor] === 3) {
+          removeData()
+          event.target.checked = false
+          drawAlert("Můžete vybrat maximálně dvě knihy od stejného autora.")
+        }
+        
+      })
       
     } else {
       
-      const index = checkedCheckboxes.indexOf(checkBoxValue)
-      if (index !== -1) {
-        checkedCheckboxes.splice(index, 1)
-      }
+      removeData()
+      
     }
     
-    
-    
-    //console.log("Checked checkboxes:", checkedCheckboxes)
   }
   
   
