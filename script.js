@@ -1,6 +1,18 @@
 let otpValue
 let email
 
+const criteria = [
+  { name: "World literature (20th and 21st century)", count: 4, currentCount: 0 },
+  { name: "Czech literature (20th and 21st century)", count: 5, currentCount: 0 },
+  { name: "World and Czech literature (19th century)", count: 3, currentCount: 0 },
+  { name: "World and Czech literature (up to 18th century)", count: 2, currentCount: 0 },
+  { name: "Minimum prose count", count: 2, currentCount: 0 },
+  { name: "Minimum poetry count", count: 2, currentCount: 0 },
+  { name: "Minimum drama count", count: 2, currentCount: 0 },
+  { name: "Minimum total books count", count: 20, currentCount: 0 },
+]
+
+
 function drawAlert(text) {
   alert(text)
 }
@@ -12,7 +24,7 @@ function makeBookList() {
     .then(data => {
       
       let bookData = data.data
-      
+
       bookData.forEach(book => {
 
         if (book.genre !== "" || book.category !== "") {
@@ -133,30 +145,7 @@ function submitForm(){
   document.getElementById("form").addEventListener("submit", function(e) {
     e.preventDefault()
 
-    function extractNameFromEmail() {
-      try {let parts = email.split('@');
-      let nameParts = parts[0].split('.');
-      let fullName = nameParts.map(function(part) {
-
-      return part.charAt(0).toUpperCase() + part.slice(1)}).join(' ')
-      return fullName;
-      }
-      catch(err){
-        console.log("email jeste nebyl definovan bo neni potvrzeny");
-      }
-
-    }
       
-    const criteria = [
-      { name: "World literature (20th and 21st century)", count: 4, currentCount: 0 },
-      { name: "Czech literature (20th and 21st century)", count: 5, currentCount: 0 },
-      { name: "World and Czech literature (19th century)", count: 3, currentCount: 0 },
-      { name: "World and Czech literature (up to 18th century)", count: 2, currentCount: 0 },
-      { name: "Minimum prose count", count: 2, currentCount: 0 },
-      { name: "Minimum poetry count", count: 2, currentCount: 0 },
-      { name: "Minimum drama count", count: 2, currentCount: 0 },
-      { name: "Minimum total books count", count: 20, currentCount: 0 },
-    ]
     
     let missingCriteria = [];
 
