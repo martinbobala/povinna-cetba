@@ -1,15 +1,16 @@
 let otpValue
 let email
+let bookList
 
 const criteria = [
   { name: "World literature (20th and 21st century)", count: 4, currentCount: 0 },
-  { name: "Czech literature (20th and 21st century)", count: 5, currentCount: 0 },
-  { name: "World and Czech literature (19th century)", count: 3, currentCount: 0 },
-  { name: "World and Czech literature (up to 18th century)", count: 2, currentCount: 0 },
-  { name: "Minimum prose count", count: 2, currentCount: 0 },
-  { name: "Minimum poetry count", count: 2, currentCount: 0 },
-  { name: "Minimum drama count", count: 2, currentCount: 0 },
-  { name: "Minimum total books count", count: 20, currentCount: 0 },
+  { name: "Česká literatura 20. a 21. století", count: 5, currentCount: 0 },
+  { name: "Světová a česká literatura 19. století", count: 3, currentCount: 0 },
+  { name: "Světová a česká literatura do konce 18. století", count: 2, currentCount: 0 },
+  { name: "próza", count: 2, currentCount: 0 },
+  { name: "poesie", count: 2, currentCount: 0 },
+  { name: "drama", count: 2, currentCount: 0 },
+  { name: "počet knih", count: 20, currentCount: 0 },
 ]
 
 
@@ -23,28 +24,28 @@ function makeBookList() {
     .then(res=> res.json())
     .then(data => {
       
-      let bookData = data.data
-
-      bookData.forEach(book => {
-
+      bookList = data.data
+      
+      bookList.forEach(book => {
+        
         if (book.genre !== "" || book.category !== "") {
           
           const listItem = document.createElement('li')
-        
+          
           listItem.innerHTML = `<input type='checkbox' value='${book.name}'><span class="book">${book.name}</span> <span class="author">${book.autor}(${book.genre})</span>`
           
           document.getElementById(book.category).appendChild(listItem);
         }
-
+        
         else{
           console.log("Chybí kategorie nebo žánr Knihy, Prosím zkontrolujte Google tabulku povinna cetba a jeji hodnoty u knihy " + book.name )
         }
       })
-
+      
       onCheckboxChange()
-
+    
     })
-
+    
 
 }
 
@@ -84,12 +85,12 @@ function sendOtp() {
         return false
     
       } else {
-
+        
         drawAlert("Zadaný email není platný nebo nepatří do domény tznj.cz ve správném formátu. Zkontrolujte prosím svůj vstup a zkuste to znovu.");
         return false
       }
     }
-  
+    
     if (validateEmail(email)) {
       
       Email.send({
@@ -106,29 +107,55 @@ function sendOtp() {
   
 }
 
+function getObjectByName(name, arr) {
+  return arr.find(item => item.name === name)
+}
+
+
 function onCheckboxChange() {
-    
+  
   let checkedCheckboxes = [];
   
   
   function handleCheckboxChange(event) {
     
-    const checkboxValue = event.target.value
+    const checkBoxValue = event.target.value
     
     
     if (event.target.checked) {
       
-      checkedCheckboxes.push(checkboxValue);
+      const book = getObjectByName(checkBoxValue, bookList)
+
+      const genreCriterium = getObjectByName(book.genre, criteria)
+      const categoryCriterium = getObjectByName(book.category, criteria)
+      const countCriterium = getObjectByName("počet knih", criteria)
+
+      const criteriaArr = [genreCriterium, categoryCriterium, countCriterium]
+      
+      criteriaArr.forEach(criterum =>{
+
+        criterum.currentCount =+ 1
+
+      })
+      
+     
+      console.log(criteriaArr);
+      
+      
+      
+      checkedCheckboxes.push(checkBoxValue)
+      
     } else {
       
-      const index = checkedCheckboxes.indexOf(checkboxValue)
+      const index = checkedCheckboxes.indexOf(checkBoxValue)
       if (index !== -1) {
         checkedCheckboxes.splice(index, 1)
       }
     }
     
     
-    console.log("Checked checkboxes:", checkedCheckboxes)
+    
+    //console.log("Checked checkboxes:", checkedCheckboxes)
   }
   
   
@@ -141,22 +168,24 @@ function onCheckboxChange() {
   
 }
 
+
+
 function submitForm(){
   document.getElementById("form").addEventListener("submit", function(e) {
     e.preventDefault()
-
-      
+    
+    
     
     let missingCriteria = [];
-
-
-
+    
+    
+    
   }) 
 }
 
 document.addEventListener("DOMContentLoaded", function() {
   
- 
+  
   sendOtp()
   submitForm()
 })
