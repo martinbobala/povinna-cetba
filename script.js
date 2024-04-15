@@ -66,9 +66,9 @@ function sendOtp() {
     }
 
     otpValue = generateOTP()
+ 
     
-    
-    let emailbody = "<h2>Your OTP is </h2>" + otpValue
+    let emailbody = `<h2>Your OTP is </h2> ${otpValue}` 
     let emailValue = document.getElementById("email")
     
     function validateEmail(email) {
@@ -121,6 +121,8 @@ function onCheckboxChange() {
   function handleCheckboxChange(event) {
     
     const book = getObjectByName(event.target.value, bookList)
+
+    
 
     const genreCriterium = getObjectByName(book.genre, criteria)
     const categoryCriterium = getObjectByName(book.category, criteria)
@@ -191,6 +193,7 @@ function submitForm(){
     e.preventDefault()
 
     let missingCriteria = []
+
     
     function checkCriteria() {
       criteria.slice(0, -1).forEach(criterium => {
@@ -198,12 +201,11 @@ function submitForm(){
           
           
         }else{
-         
-          missingCriteria.push(criterium.errorMessage)
           
+          missingCriteria.push(criterium.errorMessage)
         }
       })
-
+      
       if (missingCriteria.length == []) {
         return true
       } else {
@@ -212,12 +214,28 @@ function submitForm(){
       }
     }
     
-    console.log(checkCriteria());
+    if (checkCriteria()) {
+      
+      if (otpValue === parseInt(document.getElementById("otpinput").value)) {
+        console.log("souhlasi");
+        
 
-   
+        //kolekce dat
+        //kod na odeslani :)
 
 
-  
+
+
+
+      } else {
+        drawAlert("Ověřovací kód je neplatný.")
+      }
+      
+    }
+    
+    
+    
+    
   }) 
 }
 
