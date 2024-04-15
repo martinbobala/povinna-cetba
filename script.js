@@ -1,17 +1,18 @@
 let otpValue
-let email
+let emailG
 let bookList
 
 const criteria = [
-  { name: "World literature (20th and 21st century)", count: 4, currentCount: 0 },
-  { name: "Česká literatura 20. a 21. století", count: 5, currentCount: 0 },
-  { name: "Světová a česká literatura 19. století", count: 3, currentCount: 0 },
-  { name: "Světová a česká literatura do konce 18. století", count: 2, currentCount: 0 },
-  { name: "próza", count: 2, currentCount: 0 },
-  { name: "poesie", count: 2, currentCount: 0 },
-  { name: "drama", count: 2, currentCount: 0 },
-  { name: "počet knih", count: 20, currentCount: 0 },
-  { name: "autoři", currentCount: []},
+  { name: "Světová literatura 20. a 21. století", count: 4, currentCount: 0, errorMessage: "Vyberte minimálně 4 knihy z kategorie Světová literatura 20. a 21. století." },
+  { name: "Česká literatura 20. a 21. století", count: 5, currentCount: 0, errorMessage: "Vyberte minimálně 5 knih z kategorie Česká literatura 20. a 21. století." },
+  { name: "Světová a česká literatura 19. století", count: 3, currentCount: 0, errorMessage: "Vyberte minimálně 3 knihy z kategorie Světová a česká literatura 19. století."},
+  { name: "Světová a česká literatura do konce 18. století", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 khihy z kategorie Světová a česká literatura do konce 18. století." },
+  { name: "próza", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie próza." },
+  { name: "poezie", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie poesie."},
+  { name: "drama", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie drama."},
+  { name: "počet knih", count: 20, currentCount: 0, errorMessage:"Vyberte alespoň 20 knih." },
+  { name: "autoři", currentCount: [], count: 2, errorMessage: "Můžete vybrat maximálně dvě knihy od stejného autora." },
+
 ]
 
 
@@ -64,11 +65,11 @@ function sendOtp() {
       
     }
 
-    email = document.getElementById("email")
     otpValue = generateOTP()
-  
+    
     
     let emailbody = "<h2>Your OTP is </h2>" + otpValue
+    let emailValue = document.getElementById("email")
     
     function validateEmail(email) {
       
@@ -78,6 +79,7 @@ function sendOtp() {
 
         drawAlert("E-mail byl úspěšně odeslán na adresu " + email.value + ". Prosím, zkontrolujte složku s nevyžádanou poštou spam, pokud e-mail není v doručené poště.")
         emailAlreadySent = true
+        emailG = emailValue
         return true
 
       } else if(emailAlreadySent === true){
@@ -92,11 +94,11 @@ function sendOtp() {
       }
     }
     
-    if (validateEmail(email)) {
+    if (validateEmail(emailValue)) {
       
       Email.send({
         SecureToken : "0d855591-c712-4eff-9dbd-8468ce2b569c",
-        To : email.value,
+        To : emailG.value,
         From : "martin.bobala@tznj.cz",
         Subject : "Ověřovací kód",
         Body : emailbody}).then(
@@ -156,10 +158,10 @@ function onCheckboxChange() {
 
       autorArr.forEach(autor => {
         count[autor] = (count[autor] || 0) +1
-        if (count[autor] === 3) {
+        if (count[autor] > autorCriterium.count) {
           removeData()
           event.target.checked = false
-          drawAlert("Můžete vybrat maximálně dvě knihy od stejného autora.")
+          drawAlert(autorCriterium.errorMessage)
         }
         
       })
@@ -185,15 +187,37 @@ function onCheckboxChange() {
 
 
 function submitForm(){
-  document.getElementById("form").addEventListener("submit", function(e) {
+  document.getElementById("submitButton").addEventListener("click", function(e) {
     e.preventDefault()
+
+    let missingCriteria = []
     
+    function checkCriteria() {
+      criteria.slice(0, -1).forEach(criterium => {
+        if (criterium.count <= criterium.currentCount) {
+          
+          
+        }else{
+         
+          missingCriteria.push(criterium.errorMessage)
+          
+        }
+      })
+
+      if (missingCriteria.length == []) {
+        return true
+      } else {
+        console.log(missingCriteria)
+        return false
+      }
+    }
     
-    
-    let missingCriteria = [];
-    
-    
-    
+    console.log(checkCriteria());
+
+   
+
+
+  
   }) 
 }
 
