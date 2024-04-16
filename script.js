@@ -1,6 +1,8 @@
 let otpValue
 let emailG
 let bookList
+let selectedBooks = []
+
 
 const criteria = [
   { name: "Světová literatura 20. a 21. století", count: 4, currentCount: 0, errorMessage: "Vyberte minimálně 4 knihy z kategorie Světová literatura 20. a 21. století." },
@@ -117,47 +119,49 @@ function getObjectByName(name, arr) {
 
 function onCheckboxChange() {
   
-   
+  
   function handleCheckboxChange(event) {
     
     const book = getObjectByName(event.target.value, bookList)
-
     
-
+    
+    
     const genreCriterium = getObjectByName(book.genre, criteria)
     const categoryCriterium = getObjectByName(book.category, criteria)
     const countCriterium = getObjectByName("počet knih", criteria)
-
+    
     const autorCriterium = getObjectByName("autoři", criteria)
     const autorArr = autorCriterium.currentCount
-
+    
     const criteriaArr = [genreCriterium, categoryCriterium, countCriterium]
     
-
+    
     function removeData(){
       const index = autorArr.indexOf(book.autor);
-        if (index !== -1) {
-          autorArr.splice(index, 1)
-        }
-    
+      const bookIndex = selectedBooks.indexOf(book.name)
+      if (index !== -1) {
+        autorArr.splice(index, 1)
+        selectedBooks.splice(bookIndex, 1)
+      }
+      
       criteriaArr.forEach(criterum =>{
-
+        
         criterum.currentCount -= 1
       })
-
+      
     }
     
     if (event.target.checked) {
       
       autorArr.push(book.autor)
-
+      selectedBooks.push(book.name) //pokud bude potreba pridat i autora
       criteriaArr.forEach(criterum =>{
-
+        
         criterum.currentCount += 1
       })
       
       const count = {}
-
+      
       autorArr.forEach(autor => {
         count[autor] = (count[autor] || 0) +1
         if (count[autor] > autorCriterium.count) {
@@ -177,13 +181,13 @@ function onCheckboxChange() {
   }
   
   
+
+  
   const checkBoxes = document.querySelectorAll('input[type="checkbox"]')
   
   checkBoxes.forEach(checkbox => {
     checkbox.addEventListener("change", handleCheckboxChange)
-    
   })
-  
 }
 
 
@@ -191,9 +195,9 @@ function onCheckboxChange() {
 function submitForm(){
   document.getElementById("submitButton").addEventListener("click", function(e) {
     e.preventDefault()
-
+    
     let missingCriteria = []
-
+    
     
     function checkCriteria() {
       criteria.slice(0, -1).forEach(criterium => {
@@ -214,41 +218,67 @@ function submitForm(){
       }
     }
     
+
+
     if (checkCriteria()) {
       
       if (otpValue === parseInt(document.getElementById("otpinput").value)) {
-        console.log("souhlasi");
+
+
         
-
-        //kolekce dat
-        //kod na odeslani :)
-
-
-
-
-
+        function extractNameFromEmail() {
+          
+          let parts = emailG.value.split('@')[0].split('.')
+          parts = parts.map(part => part.charAt(0).toUpperCase() + part.slice(1))
+        
+          return parts.join(' ')
+        
+        }
+        
+        let bookSting = selectedBooks.join("&")
+        let formDataString = emailG.value + "&" + extractNameFromEmail() + "&" + bookSting
+        
+        console.log(formDataString)////
+        
+        fetch(
+          "https://script.google.com/macros/s/AKfycbwVND3ufXn-_-jGzNjhbXI5USI6xuN6QlEvx-HGgfv42o2L96SDdeLcx_ZGrzPkyEL7/exec",
+          {
+            redirect: "follow",
+            method: "POST",
+            body: formDataString,
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8",
+            },
+          }
+        )
+        
+        
+        
       } else {
         drawAlert("Ověřovací kód je neplatný.")
       }
       
-    }
-    
-    
-    
-    
+    } 
   }) 
 }
 
+
+
+  
+  
+  
+  
+   
 document.addEventListener("DOMContentLoaded", function() {
   
   
   sendOtp()
   submitForm()
+  
 })
 
 
 makeBookList()
-
 
 
 
