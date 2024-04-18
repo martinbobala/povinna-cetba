@@ -77,7 +77,7 @@ function sendOtp() {
       
       let emailPattern = /^[a-z]+\.[a-z]+@tznj\.cz$/
       
-      if (emailPattern.test(email.value) && emailAlreadySent === false) {
+      if (emailPattern.test(email.value)  /*&& emailAlreadySent === false*/) {
 
         drawAlert("E-mail byl úspěšně odeslán na adresu " + email.value + ". Prosím, zkontrolujte složku s nevyžádanou poštou spam, pokud e-mail není v doručené poště.")
         emailAlreadySent = true
@@ -220,9 +220,9 @@ function submitForm(){
     
 
 
-    if (checkCriteria()) {
+    if (/*checkCriteria()*/ true) {
       
-      if (otpValue === parseInt(document.getElementById("otpinput").value)) {
+      if (/*otpValue === parseInt(document.getElementById("otpinput").value)*/ true) {
 
 
         
@@ -231,18 +231,17 @@ function submitForm(){
           let parts = emailG.value.split('@')[0].split('.')
           parts = parts.map(part => part.charAt(0).toUpperCase() + part.slice(1))
         
-          return parts.join(' ')
+         return parts.join(' ')
         
         }
         
         let bookSting = selectedBooks.join("&")
-        let formDataString = emailG.value + "&" + extractNameFromEmail() + "&" + bookSting
+        let formDataString = /* emailG.value + "&" + extractNameFromEmail()*/ + "&" + bookSting
         
-        console.log(formDataString)////
         
         fetch(
           "https://script.google.com/macros/s/AKfycbwVND3ufXn-_-jGzNjhbXI5USI6xuN6QlEvx-HGgfv42o2L96SDdeLcx_ZGrzPkyEL7/exec",
-          {
+          { 
             redirect: "follow",
             method: "POST",
             body: formDataString,
@@ -250,8 +249,14 @@ function submitForm(){
               "Content-Type": "text/plain;charset=utf-8",
             },
           }
-        )
-        
+        ).then(function (response) {
+                
+          if (response) {
+            console.log(response);
+          } else {
+            console.log("Failed to submit the form.")
+          }
+        })
         
         
       } else {
