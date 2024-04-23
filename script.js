@@ -236,29 +236,21 @@ function submitForm(){
         }
         
         let bookSting = selectedBooks.join("&")
-        let formDataString = /* emailG.value + "&" + extractNameFromEmail()*/ + "&" + bookSting
+       
+        let formDataString = "" + extractNameFromEmail() + "&" + emailG.value + "&" + bookSting + ""
         
+        console.log("fethc")
+        fetch("https://script.google.com/macros/s/AKfycbwzSjPQyE-1w9uNlx_tuPudBVhgYED874Rp6JcZr87Rcg5roaTP6qBYSrB4fRHa3UIYGw/exec",
+        {
+          method:"POST",
+          body: (formDataString),
+
+
+
+        }).then(res => res.text())
         
-        fetch(
-          "https://script.google.com/macros/s/AKfycbwVND3ufXn-_-jGzNjhbXI5USI6xuN6QlEvx-HGgfv42o2L96SDdeLcx_ZGrzPkyEL7/exec",
-          { 
-            redirect: "follow",
-            method: "POST",
-            body: formDataString,
-            headers: {
-              "Content-Type": "text/plain;charset=utf-8",
-            },
-          }
-        ).then(function (response) {
-                
-          if (response) {
-            console.log(response);
-          } else {
-            console.log("Failed to submit the form.")
-          }
-        })
-        
-        
+      
+    
       } else {
         drawAlert("Ověřovací kód je neplatný.")
       }
