@@ -77,7 +77,7 @@ function sendOtp() {
       
       let emailPattern = /^[a-z]+\.[a-z]+@tznj\.cz$/
       
-      if (emailPattern.test(email.value)  /*&& emailAlreadySent === false*/) {
+      if (emailPattern.test(email.value) && emailAlreadySent === false) {
 
         drawAlert("E-mail byl úspěšně odeslán na adresu " + email.value + ". Prosím, zkontrolujte složku s nevyžádanou poštou spam, pokud e-mail není v doručené poště.")
         emailAlreadySent = true
@@ -220,9 +220,9 @@ function submitForm(){
     
 
 
-    if (/*checkCriteria()*/ true) {
+    if (checkCriteria() ) {
       
-      if (/*otpValue === parseInt(document.getElementById("otpinput").value)*/ true) {
+      if (otpValue === parseInt(document.getElementById("otpinput").value) ) {
 
 
         
