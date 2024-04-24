@@ -213,7 +213,7 @@ function submitForm(){
       if (missingCriteria.length == []) {
         return true
       } else {
-        console.log(missingCriteria)
+        drawAlert(missingCriteria)
         return false
       }
     }
