@@ -239,7 +239,7 @@ function submitForm(){
        
         let formDataString = "" + extractNameFromEmail() + "&" + emailG.value + "&" + bookSting + ""
         
-        console.log("fethc")
+        
         fetch("https://script.google.com/macros/s/AKfycbwzSjPQyE-1w9uNlx_tuPudBVhgYED874Rp6JcZr87Rcg5roaTP6qBYSrB4fRHa3UIYGw/exec",
         {
           method:"POST",
@@ -248,6 +248,7 @@ function submitForm(){
 
 
         }).then(res => res.text())
+        .then(res => drawAlert("odeslano"))
         
       
     
