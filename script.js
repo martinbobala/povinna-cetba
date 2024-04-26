@@ -190,9 +190,14 @@ function onCheckboxChange() {
   })
 }
 
+function submitForm() {
+  document.getElementById("submitButton").addEventListener("click", function(e) {
+    e.preventDefault()
+  })
+}
 
 
-function submitForm(){
+function submit(){
   document.getElementById("submitButton").addEventListener("click", function(e) {
     e.preventDefault()
     
