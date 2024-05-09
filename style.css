@@ -7,6 +7,9 @@ h1{
 
 }
 
+h2{
+    outline: dashed 1px;
+}
 
 .book {
     font-weight: bold;
@@ -17,7 +20,7 @@ h1{
 
 .author {
     font-style: italic;
-    /* Další styly pro jméno autora */
+    
 }
 
 .formContainer {
@@ -30,7 +33,8 @@ h1{
 
 
 .list{
-  width: 550px;
+  width: 700px;
   outline: dashed 1px;
   margin-block: 10px;
+  font-size: 20px;
 }
