@@ -11,8 +11,40 @@ h2{
     outline: dashed 1px;
 }
 
+.formContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    flex-direction: column;
+}      
+
+.list{
+    width: 700px;
+    outline: dashed 1px;
+    margin-block: 10px;
+}
+
+li{
+    display: flex;
+    padding: 10px;
+}
+
+.listText{
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox{
+    width: 23px;
+    height: 23px;
+    align-self: center;
+}
+
 .book {
     font-weight: bold;
+    font-size: 23px;
+    padding-bottom: 2px;
     /* Další styly pro název knihy */
 }
 
@@ -20,21 +52,6 @@ h2{
 
 .author {
     font-style: italic;
-    
+    font-size: 21px;
 }
 
-.formContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: sans-serif;
-    flex-direction: column;
-}                           
-
-
-.list{
-  width: 700px;
-  outline: dashed 1px;
-  margin-block: 10px;
-  font-size: 20px;
-}

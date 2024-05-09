@@ -37,7 +37,11 @@ function makeBookList() {
         
         const listItem = document.createElement('li')
         
-        listItem.innerHTML = `<input type='checkbox' value='${book.name}'><span class="book">${book.name}</span> <span class="author">${book.autor}(${book.genre})</span>`
+        listItem.innerHTML = `<input type='checkbox' class="checkbox" id="${book.name}" value='${book.name}'>
+                              <div class = "listText">
+                              <label class="book" for="${book.name}">${book.name}</label>
+                              <label class="author" for="${book.name}">${book.autor}(${book.genre})</label>
+                              </div>`
         
         document.getElementById(book.category).appendChild(listItem);
       }
@@ -120,8 +124,8 @@ function sendOtp() {
     
     function onCheckboxChange() {
       
-      
       function handleCheckboxChange(event) {
+        
         
         const book = getObjectByName(event.target.value, bookList)
         
