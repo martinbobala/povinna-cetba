@@ -1,3 +1,10 @@
+
+body{
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
 h1{
     display: flex;
     outline: dashed 1px;
@@ -9,25 +16,24 @@ h1{
 
 h2{
     outline: dashed 1px;
+    width: 638px;
 }
 
 .formContainer {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: sans-serif;
     flex-direction: column;
 }      
 
 .list{
-    width: 700px;
+    width: 900px;
     outline: dashed 1px;
-    margin-block: 10px;
 }
 
 li{
     display: flex;
-    padding: 10px;
+   
 }
 
 .listText{
@@ -55,3 +61,6 @@ li{
     font-size: 21px;
 }
 
+@media (min-width: 640px) {
+    
+}
