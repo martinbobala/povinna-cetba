@@ -1,6 +1,7 @@
 $backroundColor:rgb(32, 32, 32);
 $foregroundColor:rgb(43, 43, 43);
 $checkboxColor:rgb(150, 146, 142);
+$buttonColor:rgb(70, 70, 70);
 
 $with: 638px;
 $radius: 5px;
@@ -42,7 +43,7 @@ body{
         appearance: none;
         height: 15px;
         width: 15px;
-        background-color:rgb(44, 44, 44);
+        background-color:rgb(36, 36, 36);;
         border: 1px solid;
         border-color: rgb(152, 152, 152);
         border-radius: 4px;
@@ -117,7 +118,15 @@ li{
     
 }
 
-   
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px rgb(36, 36, 36);
+}
 
 .inputdiv{
     width: $with;
@@ -127,12 +136,75 @@ li{
     background-color: $foregroundColor;
     border-radius: $radius;
     
+    @mixin buttonMix{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+        width: 154px;
+        border-radius: 4px;
+        margin-right: 15px;
+        background-color: $buttonColor;
+        color: white;
+        border: 1px solid rgb(43, 43, 43);
+
+        &:hover{
+            background-color:rgb(98, 98, 98);
+        }
+        &:active{
+            background-color: rgb(43, 43, 43);
+        }
+    }
+
+    @mixin inputMix{
+        display: flex;
+        align-items: center;
+        padding: 2px;
+        padding-left: 7px;
+        border: 1px solid;
+        border-color: rgb(78, 78, 78);
+        border-radius: 3px;
+        background-color: rgb(70, 70, 70);
+        color: white;
+        &::placeholder{
+            color: rgb(218, 218, 218);
+            
+        }
+    } 
+
     .otp{
-     margin-left: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 15px;
+
+        
+        #otpButton{
+            
+            @include buttonMix();
+        }
+        
+        #email{
+            @include inputMix();
+            height: 22px;
+        }
     }
 
 
-    .data{
+    .data{  
        margin-left: 15px;
+       display: flex;
+       justify-content: space-between;
+
+       #submitButton{
+          @include buttonMix();
+           margin-top: 15px;
+        }
+
+       #otpinput{
+          @include inputMix();
+          margin-top: 15px;
+          height: 22px;
+       }
     }
 }
