@@ -1,66 +1,109 @@
-
-body{
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
+body {
+  background-color: rgb(32, 32, 32);
+  font: 19px "system-ui";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: rgb(255, 255, 255);
+}
+body .header1 {
+  width: 638px;
+  margin-top: 20px;
+}
+body .header1 h1 {
+  font-size: 23px;
+  margin: 0px;
+  margin-left: 10px;
+}
+body h2 {
+  width: 638px;
+  margin-top: 35px;
+  margin-bottom: 5px;
+  font-size: 17px;
+}
+body input[type=checkbox] {
+  display: flex;
+  align-self: center;
+  position: relative;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  height: 15px;
+  width: 15px;
+  background-color: rgb(44, 44, 44);
+  border: 1px solid;
+  border-color: rgb(152, 152, 152);
+  border-radius: 4px;
+}
+body input[type=checkbox]:checked {
+  background-color: rgb(152, 152, 152);
+}
+body input[type=checkbox]::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 3px;
+  height: 7px;
+  border: 2px solid transparent;
+  border-left: none;
+  border-top: none;
+  transform: rotate(45deg) scale(1);
+}
+body input[type=checkbox]:checked:before {
+  border-color: rgb(44, 44, 44);
+  animation: checkAnim 0.2s ease;
+}
+@keyframes checkAnim {
+  from {
+    transform: rotate(45deg) scale(0);
+  }
 }
 
-h1{
-    display: flex;
-    outline: dashed 1px;
-   
-    justify-content: start;
-    margin-left: 10%;
-
+.list {
+  width: 638px;
+  background-color: rgb(43, 43, 43);
+  border-radius: 5px;
 }
 
-h2{
-    outline: dashed 1px;
-    width: 638px;
+ul {
+  margin: 0;
+  padding: 10px;
+  padding-left: 15px;
 }
 
-.formContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}      
-
-.list{
-    width: 900px;
-    outline: dashed 1px;
+li {
+  display: flex;
+  flex-direction: row;
+  padding-block: 5px;
 }
 
-li{
-    display: flex;
-   
+.listText {
+  display: flex;
+  flex-direction: column;
+  margin-left: 7px;
+}
+.listText .book {
+  font-size: 15px;
+}
+.listText .author {
+  margin-top: 2px;
+  color: rgb(152, 152, 152);
+  font-size: 13px;
 }
 
-.listText{
-    display: flex;
-    flex-direction: column;
+.inputdiv {
+  width: 638px;
+  margin-top: 7px;
+  margin-bottom: 20px;
+  padding-block: 15px;
+  background-color: rgb(43, 43, 43);
+  border-radius: 5px;
 }
-
-.checkbox{
-    width: 23px;
-    height: 23px;
-    align-self: center;
+.inputdiv .otp {
+  margin-left: 15px;
 }
-
-.book {
-    font-weight: bold;
-    font-size: 23px;
-    padding-bottom: 2px;
-    /* Další styly pro název knihy */
-}
-
-
-
-.author {
-    font-style: italic;
-    font-size: 21px;
-}
-
-@media (min-width: 640px) {
-    
-}
+.inputdiv .data {
+  margin-left: 15px;
+}/*# sourceMappingURL=style.css.map */
