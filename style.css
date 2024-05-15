@@ -93,6 +93,60 @@ li {
   font-size: 13px;
 }
 
+#alert {
+  width: 638px;
+  margin-top: 7px;
+  border-radius: 5px;
+  background-color: rgb(57, 61, 27);
+  font-size: 15px;
+  font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+}
+#alert #alertText {
+  margin-block: 12px;
+  margin-right: 12px;
+}
+#alert #alertIcon {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+#alert .dot {
+  margin-inline: 15px;
+  height: 16px;
+  width: 16px;
+  background-color: rgb(108, 203, 95);
+  border-radius: 50%;
+  display: inline-block;
+}
+#alert .dot::after {
+  content: "i";
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: rgb(57, 61, 27);
+  position: absolute;
+  left: 22px;
+  top: 2px;
+  width: 5px;
+  height: 5px;
+  display: block;
+}
+#alert .dot::before {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 3px;
+  width: 3px;
+  height: 7px;
+  border: 1px solid;
+  border-color: rgb(57, 61, 27);
+  border-left: none;
+  border-top: none;
+  transform: rotate(45deg) scale(1);
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -134,7 +188,7 @@ input:-webkit-autofill:active {
   background-color: rgb(98, 98, 98);
 }
 .inputdiv .otp #otpButton:active {
-  background-color: rgb(43, 43, 43);
+  background-color: rgb(55, 55, 55);
 }
 .inputdiv .otp #email {
   display: flex;
@@ -144,7 +198,7 @@ input:-webkit-autofill:active {
   border: 1px solid;
   border-color: rgb(78, 78, 78);
   border-radius: 3px;
-  background-color: rgb(70, 70, 70);
+  background-color: rgb(36, 36, 36);
   color: white;
   height: 22px;
 }
@@ -176,7 +230,7 @@ input:-webkit-autofill:active {
   background-color: rgb(98, 98, 98);
 }
 .inputdiv .data #submitButton:active {
-  background-color: rgb(43, 43, 43);
+  background-color: rgb(55, 55, 55);
 }
 .inputdiv .data #otpinput {
   display: flex;
@@ -186,7 +240,7 @@ input:-webkit-autofill:active {
   border: 1px solid;
   border-color: rgb(78, 78, 78);
   border-radius: 3px;
-  background-color: rgb(70, 70, 70);
+  background-color: rgb(36, 36, 36);
   color: white;
   margin-top: 15px;
   height: 22px;
