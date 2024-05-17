@@ -6,6 +6,13 @@ $buttonColor:rgb(70, 70, 70);
 $with: 638px;
 $radius: 5px;
 
+:root{
+
+    --backgroundColor: rgb(57, 61, 27);
+   
+}
+
+
 body{
     background-color: $backroundColor;
     font:  19px "system-ui";
@@ -121,22 +128,26 @@ li{
     width: $with;
     margin-top: 7px;
     border-radius: 5px;
-    background-color: rgb(57, 61, 27);
+    background-color: var(--backgroundColor);
     font-size: 15px;
     font-weight: 400;
-    display: flex;
     justify-content: space-between;
-
+    display: none;
+    
+    
     #alertText{
-      margin-block: 12px;
-      margin-right: 12px;
+        display: flex;
+        flex-grow: 1;
+        text-align: left;
+        margin-block: 12px;
+        margin-right: 12px;
     }
 
     #alertIcon{
         position: relative;
         display: flex;
         justify-content: center;
-        margin-top: 16px;
+        margin-top: 14px;
     }
     
 
@@ -144,7 +155,6 @@ li{
 
     .dot {
         margin-inline: 15px;
-       
         height: 16px;
         width: 16px;
         background-color: rgb(108, 203, 95);
@@ -230,6 +240,11 @@ input:-webkit-autofill:active{
         border-radius: 3px;
         background-color: rgb(36, 36, 36);
         color: white;
+        &:focus{
+            outline: none;
+            border: solid 1px;
+            border-color:rgb(218, 218, 218);
+        }
         &::placeholder{
             color: rgb(218, 218, 218);
             

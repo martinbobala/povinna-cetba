@@ -1,3 +1,10 @@
+:root {
+  --backgroundColor: rgb(57, 61, 27);
+  --dotColor: rgb(108, 203, 95);
+  --iIcon: block;
+  --checkmark: 0px;
+}
+
 body {
   background-color: rgb(32, 32, 32);
   font: 19px "system-ui";
@@ -96,14 +103,18 @@ li {
 #alert {
   width: 638px;
   margin-top: 7px;
+  margin-bottom: 1px;
   border-radius: 5px;
-  background-color: rgb(57, 61, 27);
+  background-color: var(--backgroundColor);
   font-size: 15px;
   font-weight: 400;
-  display: flex;
   justify-content: space-between;
+  display: none;
 }
 #alert #alertText {
+  display: flex;
+  flex-grow: 1;
+  text-align: left;
   margin-block: 12px;
   margin-right: 12px;
 }
@@ -111,27 +122,27 @@ li {
   position: relative;
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: 14px;
 }
 #alert .dot {
   margin-inline: 15px;
   height: 16px;
   width: 16px;
-  background-color: rgb(108, 203, 95);
+  background-color: var(--dotColor);
   border-radius: 50%;
   display: inline-block;
 }
 #alert .dot::after {
-  content: "i";
+  content: "!";
   font-family: Arial, Helvetica, sans-serif;
   font-size: 11px;
-  color: rgb(57, 61, 27);
+  color: rgb(67, 53, 25);
   position: absolute;
   left: 22px;
   top: 2px;
   width: 5px;
   height: 5px;
-  display: block;
+  display: var(--iIcon);
 }
 #alert .dot::before {
   content: "";
@@ -140,7 +151,7 @@ li {
   top: 3px;
   width: 3px;
   height: 7px;
-  border: 1px solid;
+  border: var(--checkmark) solid;
   border-color: rgb(57, 61, 27);
   border-left: none;
   border-top: none;
@@ -202,6 +213,11 @@ input:-webkit-autofill:active {
   color: white;
   height: 22px;
 }
+.inputdiv .otp #email:focus {
+  outline: none;
+  border: solid 1px;
+  border-color: rgb(218, 218, 218);
+}
 .inputdiv .otp #email::-moz-placeholder {
   color: rgb(218, 218, 218);
 }
@@ -244,6 +260,11 @@ input:-webkit-autofill:active {
   color: white;
   margin-top: 15px;
   height: 22px;
+}
+.inputdiv .data #otpinput:focus {
+  outline: none;
+  border: solid 1px;
+  border-color: rgb(218, 218, 218);
 }
 .inputdiv .data #otpinput::-moz-placeholder {
   color: rgb(218, 218, 218);

@@ -5,23 +5,57 @@ let selectedBooks = []
 let formAlreadysent = false
 
 
+
 const criteria = [
-  { name: "Světová literatura 20. a 21. století", count: 4, currentCount: 0, errorMessage: "Vyberte minimálně 4 knihy z kategorie Světová literatura 20. a 21. století." },
-  { name: "Česká literatura 20. a 21. století", count: 5, currentCount: 0, errorMessage: "Vyberte minimálně 5 knih z kategorie Česká literatura 20. a 21. století." },
-  { name: "Světová a česká literatura 19. století", count: 3, currentCount: 0, errorMessage: "Vyberte minimálně 3 knihy z kategorie Světová a česká literatura 19. století."},
-  { name: "Světová a česká literatura do konce 18. století", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 khihy z kategorie Světová a česká literatura do konce 18. století." },
-  { name: "próza", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie próza." },
-  { name: "poezie", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie poesie."},
-  { name: "drama", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie drama."},
-  { name: "počet knih", count: 20, currentCount: 0, errorMessage:"Vyberte alespoň 20 knih." },
-  { name: "autoři", currentCount: [], count: 2, errorMessage: "Můžete vybrat maximálně dvě knihy od stejného autora." },
+  { name: "Světová literatura 20. a 21. století", count: 4, currentCount: 0, errorMessage: "Vyberte minimálně 4 knihy z kategorie Světová literatura 20. a 21. století. \n" },
+  { name: "Česká literatura 20. a 21. století", count: 5, currentCount: 0, errorMessage: "Vyberte minimálně 5 knih z kategorie Česká literatura 20. a 21. století.\n" },
+  { name: "Světová a česká literatura 19. století", count: 3, currentCount: 0, errorMessage: "Vyberte minimálně 3 knihy z kategorie Světová a česká literatura 19. století.\n"},
+  { name: "Světová a česká literatura do konce 18. století", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 khihy z kategorie Světová a česká literatura do konce 18. století.\n" },
+  { name: "próza", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie próza.\n" },
+  { name: "poezie", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie poesie.\n"},
+  { name: "drama", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie drama.\n"},
+  { name: "počet knih", count: 20, currentCount: 0, errorMessage:"Vyberte alespoň 20 knih.\n" },
+  { name: "autoři", currentCount: [], count: 2, errorMessage: "Můžete vybrat maximálně dvě knihy od stejného autora.\n" },
 
 ]
 
 
-function drawAlert(text) {
-  alert(text)
+function drawAlert(warning, color) {
+  
+  let yellowColorB = "rgb(67, 53, 25)"
+  let yellowColorD = "rgb(252, 225, 0)"
+
+  let greenColorB = "rgb(57, 61, 27)"
+  let greenColorD = "rgb(108, 203, 95)"
+
+  let alert = document.querySelector("#alert")
+  let paragraph = document.querySelector("#alertText")
+ 
+  if (color == "green") {
+    alert.style.setProperty("--backgroundColor", greenColorB)
+    alert.style.setProperty("--dotColor", greenColorD)
+    alert.style.setProperty("--iIcon", "none" )
+    alert.style.setProperty("--checkmark", "1px")
+    
+  }else{
+    alert.style.setProperty("--backgroundColor", yellowColorB)
+    alert.style.setProperty("--dotColor", yellowColorD)
+    alert.style.setProperty("--iIcon", "block" )
+    alert.style.setProperty("--checkmark", "0px")
+
+  }
+  paragraph.textContent = warning
+  alert.style.display = "flex"
+  
+  
+  
 }
+
+function removeAlert() {
+  let alert = document.querySelector("#alert")
+  alert.style.display = "none"
+}
+
 
 function makeBookList() {
   
@@ -75,7 +109,7 @@ function sendOtp() {
     otpValue = generateOTP()
     
     
-    let emailbody = `<h2>Your OTP is </h2> ${otpValue}` 
+    let emailbody = `Váš ověřovací kód je: <h2>${otpValue}</h2>` 
     let emailValue = document.getElementById("email")
     
     function validateEmail(email) {
@@ -84,7 +118,7 @@ function sendOtp() {
       
       if (emailPattern.test(email.value) && emailAlreadySent === false) {
         
-        drawAlert("E-mail byl úspěšně odeslán na adresu " + email.value + ". Prosím, zkontrolujte složku s nevyžádanou poštou spam, pokud e-mail není v doručené poště.")
+        drawAlert("E-mail byl úspěšně odeslán na adresu " + email.value + ". Prosím, zkontrolujte složku s nevyžádanou poštou spam, pokud e-mail není v doručené poště.", "green")
         emailAlreadySent = true
         emailG = emailValue
         return true
@@ -96,7 +130,7 @@ function sendOtp() {
         
       } else {
         
-        drawAlert("Zadaný email není platný nebo nepatří do domény tznj.cz ve správném formátu. Zkontrolujte prosím svůj vstup a zkuste to znovu.");
+        drawAlert("Zadaný email není ve správném formátu nebo nepatří do domény tznj.cz.");
         return false
       }
     }
@@ -126,7 +160,7 @@ function sendOtp() {
       
       function handleCheckboxChange(event) {
         
-        
+        removeAlert()
         const book = getObjectByName(event.target.value, bookList)
         
         
@@ -250,6 +284,7 @@ function sendOtp() {
             
             let formDataString = "" + extractNameFromEmail() + "&" + emailG.value + "&" + bookSting + ""
             
+            drawAlert("odesílání..", "green")
             
             fetch("https://script.google.com/macros/s/AKfycbwzSjPQyE-1w9uNlx_tuPudBVhgYED874Rp6JcZr87Rcg5roaTP6qBYSrB4fRHa3UIYGw/exec",
             {
@@ -259,7 +294,7 @@ function sendOtp() {
           
           
         }).then(res => res.text())
-        .then(res => drawAlert("odesláno")) 
+        .then(res => drawAlert("Odesláno"), "green") 
         
       } else if(formAlreadysent){
         drawAlert("Formulář byl již odeslán.")
