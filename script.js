@@ -3,7 +3,7 @@ let emailG
 let bookList
 let selectedBooks = []
 let formAlreadysent = false
-
+let canDraw = false
 
 
 const criteria = [
@@ -21,31 +21,34 @@ const criteria = [
 
 
 function drawAlert(warning, color) {
-  
-  let yellowColorB = "rgb(67, 53, 25)"
-  let yellowColorD = "rgb(252, 225, 0)"
+  if (canDraw) {
+    let yellowColorB = "rgb(67, 53, 25)"
+    let yellowColorD = "rgb(252, 225, 0)"
 
-  let greenColorB = "rgb(57, 61, 27)"
-  let greenColorD = "rgb(108, 203, 95)"
+    let greenColorB = "rgb(57, 61, 27)"
+    let greenColorD = "rgb(108, 203, 95)"
 
-  let alert = document.querySelector("#alert")
-  let paragraph = document.querySelector("#alertText")
+    let alert = document.querySelector("#alert")
+    let paragraph = document.querySelector("#alertText")
  
-  if (color == "green") {
-    alert.style.setProperty("--backgroundColor", greenColorB)
-    alert.style.setProperty("--dotColor", greenColorD)
-    alert.style.setProperty("--iIcon", "none" )
-    alert.style.setProperty("--checkmark", "1px")
+    if (color == "green") {
+      alert.style.setProperty("--backgroundColor", greenColorB)
+      alert.style.setProperty("--dotColor", greenColorD)
+      alert.style.setProperty("--iIcon", "none" )
+      alert.style.setProperty("--checkmark", "1px")
     
-  }else{
-    alert.style.setProperty("--backgroundColor", yellowColorB)
-    alert.style.setProperty("--dotColor", yellowColorD)
-    alert.style.setProperty("--iIcon", "block" )
-    alert.style.setProperty("--checkmark", "0px")
+    }else{
+      alert.style.setProperty("--backgroundColor", yellowColorB)
+      alert.style.setProperty("--dotColor", yellowColorD)
+      alert.style.setProperty("--iIcon", "block" )
+      alert.style.setProperty("--checkmark", "0px")
 
+    }
+    paragraph.textContent = warning
+    alert.style.display = "flex"
+    console.log('gfdsdf')
   }
-  paragraph.textContent = warning
-  alert.style.display = "flex"
+  
   
   
   
@@ -62,6 +65,7 @@ function makeBookList() {
   fetch("https://script.google.com/macros/s/AKfycbwcnwHAjGUjS5OIApbrkRqbuqhIqE_B9MriFo3ofsQqftPAhi4hGcbYFNetHz1XLP4w/exec")
   .then(res=> res.json())
   .then(data => {
+
     
     bookList = data.data
     
@@ -72,10 +76,10 @@ function makeBookList() {
         const listItem = document.createElement('li')
         
         listItem.innerHTML = `<input type='checkbox' class="checkbox" id="${book.name}" value='${book.name}'>
-                              <div class = "listText">
-                              <label class="book" for="${book.name}">${book.name}</label>
-                              <label class="author" for="${book.name}">${book.autor}(${book.genre})</label>
-                              </div>`
+        <div class = "listText">
+        <label class="book" for="${book.name}">${book.name}</label>
+        <label class="author" for="${book.name}">${book.autor}(${book.genre})</label>
+        </div>`
         
         document.getElementById(book.category).appendChild(listItem);
       }
@@ -86,6 +90,10 @@ function makeBookList() {
     })
     
     onCheckboxChange()
+    sendOtp()
+    submit()
+    submitForm()
+    canDraw = true
     
   })
   
@@ -313,10 +321,7 @@ function sendOtp() {
 document.addEventListener("DOMContentLoaded", function() {
   
   
-  sendOtp()
-  submit()
-  submitForm()
-  
+
 })
 
 
