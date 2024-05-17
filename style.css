@@ -283,6 +283,7 @@ input:-webkit-autofill:active {
   border-radius: 5px;
   display: flex;
   flex-direction: row;
+  font: "system-ui" 12px;
   text-align: left;
 }
 #info #infoText {
@@ -297,7 +298,7 @@ input:-webkit-autofill:active {
 }
 #info .infoP {
   margin-block: 2px;
-  font-size: 15px;
+  font-size: 14px;
 }
 #info .infoP::before {
   content: "• ";
