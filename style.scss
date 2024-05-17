@@ -13,10 +13,11 @@ $radius: 5px;
     --checkmark: 0px;
 }
 
+
 body{
+    font-family: Arial, Helvetica, sans-serif;
     background-color: $backroundColor;
-    font:  19px "system-ui" "Arial";
-   
+    font:  19px;
     display: flex;
     align-items: center;
     justify-content: center;
