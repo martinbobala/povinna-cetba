@@ -136,8 +136,10 @@ li{
     
     
     #alertText{
+        text-align: left;
         display: flex;
         flex-grow: 1;
+        font-size: 15px;
         text-align: left;
         margin-block: 12px;
         margin-right: 12px;
@@ -205,7 +207,7 @@ input:-webkit-autofill:active{
 .inputdiv{
     width: $with;
     margin-top: 7px;
-    margin-bottom: 20px;
+    margin-bottom: 200px;
     padding-block: 15px;
     background-color: $foregroundColor;
     border-radius: $radius;
@@ -287,3 +289,60 @@ input:-webkit-autofill:active{
        }
     }
 }
+
+#info{
+    width: $with;
+    margin-top: 20px;
+    color: rgb(152, 152, 152);
+    border: solid 1px rgb(152, 152, 152);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+
+    #infoText{
+        margin-right: 15px;
+        margin-block: 15px;
+    }
+    
+    #infoIcon{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .infoP{
+        margin-block: 2px;
+        font-size: 15px;
+        &::before{
+            content: "• ";
+        }
+    }
+
+    #infoDot{
+        margin-inline: 15px;
+        height: 16px;
+        width: 16px;
+        border: solid 1px rgb(152, 152, 152);
+        border-radius: 50%;
+        display: inline-block;
+        
+        &::after{
+            content: "i";
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            color: rgb(152, 152, 152);
+            position: absolute;
+            left: 23px;
+            top:  3px;
+            width: 3px;
+            height: 5px;
+        }
+    }
+    
+}
+
+
+
+
