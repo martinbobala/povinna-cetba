@@ -145,13 +145,19 @@ function sendOtp() {
     
     if (validateEmail(emailValue)) {
       
+      function errorF(er){
+        if(er == "Failure sending mail."){
+          drawAlert("chyba při odesílání emialu.")
+        }
+      }
+
       Email.send({
         SecureToken : "0d855591-c712-4eff-9dbd-8468ce2b569c",
         To : emailG.value,
         From : "martin.bobala@tznj.cz",
         Subject : "Ověřovací kód",
         Body : emailbody}).then(
-          message => console.log(message));
+          message => errorF(message));
           
         }
         
@@ -302,7 +308,7 @@ function sendOtp() {
           
           
         }).then(res => res.text())
-        .then(res => drawAlert("Odesláno"), "green") 
+        .then(res => drawAlert("Odesláno", "green"))
         
       } else if(formAlreadysent){
         drawAlert("Formulář byl již odeslán.")
