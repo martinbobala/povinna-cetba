@@ -46,7 +46,6 @@ function drawAlert(warning, color) {
     }
     paragraph.textContent = warning
     alert.style.display = "flex"
-    console.log('gfdsdf')
   }
   
   
@@ -101,21 +100,23 @@ function makeBookList() {
 }
 
 function sendOtp() {
-  
+
   let emailAlreadySent = false
-  
+  let OtpAlreadyCreated = false
   document.getElementById("otpButton").addEventListener("click", function () {
     
     function generateOTP() {
+      OtpAlreadyCreated = true
       const digits = 6
       const min = Math.pow(10, digits - 1)
       const max = Math.pow(10, digits) - 1 
       return Math.floor(Math.random() * (max - min + 1)) + min
-      
     }
     
-    otpValue = generateOTP()
-    
+    if (OtpAlreadyCreated === false) {
+      otpValue = generateOTP()
+    }
+  
     
     let emailbody = `Váš ověřovací kód je: <h2>${otpValue}</h2>` 
     let emailValue = document.getElementById("email")
