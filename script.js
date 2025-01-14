@@ -14,11 +14,9 @@ const criteria = [
   { name: "próza", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie próza.\n" },
   { name: "poezie", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie poesie.\n"},
   { name: "drama", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie drama.\n"},
-  { name: "počet knih", count: 20, currentCount: 0, errorMessage:"Vyberte alespoň 20 knih.\n" },
   { name: "autoři", currentCount: [], count: 2, errorMessage: "Můžete vybrat maximálně dvě knihy od stejného autora.\n" },
 
 ]
-
 
 function drawAlert(warning, color) {
   if (canDraw) {
@@ -115,6 +113,7 @@ function sendOtp() {
     
     if (OtpAlreadyCreated === false) {
       otpValue = generateOTP()
+      
     }
   
     
@@ -172,7 +171,7 @@ function sendOtp() {
     
     
     function onCheckboxChange() {
-      
+     
       function handleCheckboxChange(event) {
         
         removeAlert()
@@ -260,17 +259,28 @@ function sendOtp() {
         
         function checkCriteria() {
           criteria.slice(0, -1).forEach(criterium => {
-            if (criterium.count <= criterium.currentCount) {
+            if (true/*criterium.count <= criterium.currentCount*/) {
               
               
             }else{
-              
+              drawAlert("stedrost")
               missingCriteria.push(criterium.errorMessage)
             }
           })
           
-          if (missingCriteria.length == []) {
-            return true
+          if (missingCriteria.length == []) {//missingCriteria.length == []
+
+              if (selectedBooks.length > 20) {
+                drawAlert("Vyberte maximálně 20 knih. Aktuální počet vybraných knih:" + selectedBooks.length )
+              }if (selectedBooks.length < 20) {
+                drawAlert("Vyberte alespoň 20 vtipnych knih. Aktuální počet vybraných knih:" + selectedBooks.length )
+                
+              } else {
+                drawAlert("Všechny kritéria byla splněna.", "green")
+                return true
+              }
+    
+              
           } else {
             drawAlert(missingCriteria)
             return false
@@ -280,10 +290,10 @@ function sendOtp() {
         
         
         if (checkCriteria() ) {
-          console.log(formAlreadysent)
-          if (otpValue === parseInt(document.getElementById("otpinput").value) && formAlreadysent === false ) {
+          
+          if (true) {
+            console.log("Formulář byl úspěšně odeslán.")
             
-            formAlreadysent = true
             
             
             function extractNameFromEmail() {
@@ -295,12 +305,23 @@ function sendOtp() {
               
             }
             
-            let bookSting = selectedBooks.join("&")
+              //vyuzit selectedBooks
+            selectedBooks.forEach(book => {
+
+              const listItem = document.createElement('li')
+        
+              listItem.innerHTML = `
+              <label class="book" for="${book.name}">${book.name}</label>
+              <label class="author" for="${book.name}">${book.autor}(${book.genre})</label>
+              </div>`
+              
+              document.getElementById(inputdiv.appendChild(listItem))
+            });
             
             let formDataString = "" + extractNameFromEmail() + "&" + emailG.value + "&" + bookSting + ""
             
             drawAlert("odesílání..", "green")
-            
+            //tady by asi melo byt vytvoreni Doc
             fetch("https://script.google.com/macros/s/AKfycbwzSjPQyE-1w9uNlx_tuPudBVhgYED874Rp6JcZr87Rcg5roaTP6qBYSrB4fRHa3UIYGw/exec",
             {
               method:"POST",
