@@ -6,6 +6,11 @@ $buttonColor:rgb(70, 70, 70);
 $with: 638px;
 $radius: 5px;
 
+$highlight-color: yellow;
+
+.highlight {
+  background-color: $highlight-color !important;
+}
 :root {
     --backgroundColor: rgb(57, 61, 27);
     --dotColor: rgb(108, 203, 95);
