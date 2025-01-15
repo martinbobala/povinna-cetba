@@ -234,7 +234,7 @@ input:-webkit-autofill:active {
   display: flex;
   justify-content: space-between;
 }
-.inputdiv .data #submitButton {
+.inputdiv .data .submitButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -244,13 +244,13 @@ input:-webkit-autofill:active {
   margin-right: 15px;
   background-color: rgb(70, 70, 70);
   color: white;
-  border: 1px solid rgb(43, 43, 43);
+  border: 0px solid rgb(98, 98, 98);
 
 }
-.inputdiv .data #submitButton:hover {
+.inputdiv .data .submitButton:hover {
   background-color: rgb(98, 98, 98);
 }
-.inputdiv .data #submitButton:active {
+.inputdiv .data .submitButton:active {
   background-color: rgb(55, 55, 55);
 }
 .inputdiv .data #otpinput {
@@ -327,7 +327,7 @@ input:-webkit-autofill:active {
 }/*# sourceMappingURL=style.css.map */
 
 .highlight {
-  border-color:rgb(255, 0, 0) solid 2px !important;
+  border-color:rgb(255, 0, 0)!important;
   background-color: rgba(255, 0, 0, 0.478) !important;
   animation: shake 0.5s;
 }

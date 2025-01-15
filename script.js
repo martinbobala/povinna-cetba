@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
         onCheckboxChange();
         submit();
         submitForm();
+        setupCopyButton();
         canDraw = true;
       });
   }
@@ -151,6 +152,50 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
+  function setupCopyButton() {
+    const copyButton = document.getElementById("copyButton");
+    if (copyButton) {
+      copyButton.addEventListener("click", function(e) {
+          e.preventDefault();
+
+          function copyListItems() {
+              const listItems = document.querySelectorAll("#bookSheet li");
+              let textToCopy = "";
+
+              selectedBooks.forEach(item => {
+                  // Remove extra spaces and newlines
+                  textToCopy += item.trim() + "\n";
+              });
+
+              // Remove last newline
+              textToCopy = textToCopy.trim();
+
+              // Create a temporary textarea element
+              const textarea = document.createElement('textarea');
+              textarea.value = textToCopy;
+              textarea.setAttribute('readonly', ''); // Make it readonly
+              textarea.style.position = 'absolute';
+              textarea.style.left = '-9999px'; // Move it outside of view
+
+              document.body.appendChild(textarea);
+              textarea.select();
+              
+              try {
+                  // Execute copy command
+                  document.execCommand('copy');
+                  document.body.removeChild(textarea);
+              } catch (err) {
+                  console.error('Failed to copy text:', err);
+              }
+          }
+
+          copyListItems();
+
+      });
+    }
+  }
+
+
   function submit() {
     const submitButton = document.getElementById("submitButton");
     if (submitButton) {
@@ -162,11 +207,9 @@ document.addEventListener("DOMContentLoaded", function() {
         function createSheet() {
           selectedBooks.forEach(book => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = `<div class = "listText">
-              <label class="book">${book}</label>
-            </div>`;
+            listItem.innerHTML = `<label class="book">${book}</label>`;
             listedBooks.push(listItem);
-            document.getElementById("inputdiv").appendChild(listItem);
+            document.getElementById("bookSheet").appendChild(listItem);
           });
         }
 
@@ -180,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
           });
 
-          if (missingCriteria.length === 0) {
+          if (/*missingCriteria.length === 0*/true) {
             if (selectedBooks.length > 20) {
               drawAlert("Vyberte maximálně 20 knih. Aktuální počet vybraných knih:" + selectedBooks.length);
             } else if (selectedBooks.length < 1) {
