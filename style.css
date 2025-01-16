@@ -15,6 +15,7 @@ body {
   justify-content: center;
   flex-direction: column;
   color: rgb(255, 255, 255);
+  margin-bottom: 200px;
 }
 body .header1 {
   width: 638px;
@@ -177,7 +178,7 @@ input:-webkit-autofill:active {
 .inputdiv {
   width: 638px;
   margin-top: 7px;
-  margin-bottom: 200px;
+  margin-bottom: 7px;
   padding-block: 15px;
   background-color: rgb(43, 43, 43);
   border-radius: 5px;
@@ -338,4 +339,38 @@ input:-webkit-autofill:active {
   50% { transform: translateX(3px); }
   75% { transform: translateX(-3px); }
   100% { transform: translateX(0); }
+}
+
+#bookSheet{
+  
+  margin-inline: 25px;
+  padding-top: 0px;
+  border-bottom: solid 1px rgb(182, 182, 182);
+  font-size: 15px;
+  color: rgb(242, 242, 242)!important;
+}
+
+#bookSheet .gridBook::before {
+  content: "• ";
+  margin-left: 5px;
+  
+}
+
+
+#bookdiv{
+  padding-block: 15px;
+}
+
+.li2{
+  border-inline: solid 1px rgb(182, 182, 182);
+  padding-block: 5px;
+}
+
+.h3{
+  font-size: 15px;
+  border: solid 1px rgb(182, 182, 182);
+  margin-top: 5px;
+  margin-bottom: 0px;
+  width: auto;
+  padding: 10px;
 }

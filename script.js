@@ -207,7 +207,8 @@ document.addEventListener("DOMContentLoaded", function() {
         function createSheet() {
           selectedBooks.forEach(book => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = `<label class="book">${book}</label>`;
+            listItem.className = "li2";
+            listItem.innerHTML = `<label class="gridBook">${book}</label>`;
             listedBooks.push(listItem);
             document.getElementById("bookSheet").appendChild(listItem);
           });
@@ -246,6 +247,7 @@ document.addEventListener("DOMContentLoaded", function() {
           } else if (formAlreadysent === true) {
             listedBooks.forEach(listItem => {
               listItem.remove();
+              
             });
             drawAlert("Tabulka byla úspěšně aktualizována", "green");
             createSheet();
