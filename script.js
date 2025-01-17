@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
-
+document.addEventListener("DOMContentLoaded", function () {
   let bookList;
   let selectedBooks = [];
   const listedBooks = [];
@@ -7,16 +6,65 @@ document.addEventListener("DOMContentLoaded", function() {
   let canDraw = false;
 
   const criteria = [
-    { name: "Světová literatura 20. a 21. století", count: 4, currentCount: 0, errorMessage: "Vyberte minimálně 4 knihy z kategorie Světová literatura 20. a 21. století.\n" },
-    { name: "Česká literatura 20. a 21. století", count: 5, currentCount: 0, errorMessage: "Vyberte minimálně 5 knih z kategorie Česká literatura 20. a 21. století.\n" },
-    { name: "Světová a česká literatura 19. století", count: 3, currentCount: 0, errorMessage: "Vyberte minimálně 3 knihy z kategorie Světová a česká literatura 19. století.\n" },
-    { name: "Světová a česká literatura do konce 18. století", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 knihy z kategorie Světová a česká literatura do konce 18. století.\n" },
-    { name: "próza", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie próza.\n" },
-    { name: "poezie", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie poesie.\n" },
-    { name: "drama", count: 2, currentCount: 0, errorMessage: "Vyberte minimálně 2 díla z kategorie drama.\n" },
-    { name: "autoři", currentCount: [], count: 2, errorMessage: "Můžete vybrat maximálně dvě knihy od stejného autora.\n" }
+    {
+      name: "Světová literatura 20. a 21. století",
+      count: 4,
+      currentCount: 0,
+      errorMessage:
+        "Vyberte minimálně 4 knihy z kategorie Světová literatura 20. a 21. století.\n",
+    },
+    {
+      name: "Česká literatura 20. a 21. století",
+      count: 5,
+      currentCount: 0,
+      errorMessage:
+        "Vyberte minimálně 5 knih z kategorie Česká literatura 20. a 21. století.\n",
+    },
+    {
+      name: "Světová a česká literatura 19. století",
+      count: 3,
+      currentCount: 0,
+      errorMessage:
+        "Vyberte minimálně 3 knihy z kategorie Světová a česká literatura 19. století.\n",
+    },
+    {
+      name: "Světová a česká literatura do konce 18. století",
+      count: 2,
+      currentCount: 0,
+      errorMessage:
+        "Vyberte minimálně 2 knihy z kategorie Světová a česká literatura do konce 18. století.\n",
+    },
+    {
+      name: "próza",
+      count: 2,
+      currentCount: 0,
+      errorMessage: "Vyberte minimálně 2 díla z kategorie próza.\n",
+    },
+    {
+      name: "poezie",
+      count: 2,
+      currentCount: 0,
+      errorMessage: "Vyberte minimálně 2 díla z kategorie poesie.\n",
+    },
+    {
+      name: "drama",
+      count: 2,
+      currentCount: 0,
+      errorMessage: "Vyberte minimálně 2 díla z kategorie drama.\n",
+    },
+    {
+      name: "autoři",
+      currentCount: [],
+      count: 2,
+      errorMessage: "Můžete vybrat maximálně dvě knihy od stejného autora.\n",
+    },
   ];
- 
+
+  function drawPicked() {
+    let pickedBooks = document.querySelector("#bookdiv");
+    pickedBooks.style.display = "block";
+  }
+
   function drawAlert(warning, color) {
     if (canDraw) {
       let yellowColorB = "rgb(67, 53, 25)";
@@ -48,14 +96,16 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function makeBookList() {
-    fetch("https://script.google.com/macros/s/AKfycbwcnwHAjGUjS5OIApbrkRqbuqhIqE_B9MriFo3ofsQqftPAhi4hGcbYFNetHz1XLP4w/exec")
-      .then(res => res.json())
-      .then(data => {
+    fetch(
+      "https://script.google.com/macros/s/AKfycbwcnwHAjGUjS5OIApbrkRqbuqhIqE_B9MriFo3ofsQqftPAhi4hGcbYFNetHz1XLP4w/exec"
+    )
+      .then((res) => res.json())
+      .then((data) => {
         bookList = data.data;
 
-        bookList.forEach(book => {
+        bookList.forEach((book) => {
           if (book.genre !== "" || book.category !== "") {
-            const listItem = document.createElement('li');
+            const listItem = document.createElement("li");
             listItem.innerHTML = `<input type='checkbox' class="checkbox" id="${book.name}" value='${book.name}'>
             <div class = "listText">
             <label class="book" for="${book.name}">${book.name}</label>
@@ -63,7 +113,10 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>`;
             document.getElementById(book.category).appendChild(listItem);
           } else {
-            console.log("Chybí kategorie nebo žánr Knihy, Prosím zkontrolujte Google tabulku povinna cetba a jeji hodnoty u knihy " + book.name);
+            console.log(
+              "Chybí kategorie nebo žánr Knihy, Prosím zkontrolujte Google tabulku povinna cetba a jeji hodnoty u knihy " +
+                book.name
+            );
           }
         });
 
@@ -76,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function getObjectByName(name, arr) {
-    return arr.find(item => item.name === name);
+    return arr.find((item) => item.name === name);
   }
 
   function onCheckboxChange() {
@@ -98,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
           selectedBooks.splice(bookIndex, 1);
         }
 
-        criteriaArr.forEach(criterum => {
+        criteriaArr.forEach((criterum) => {
           if (criterum) {
             criterum.currentCount -= 1;
           }
@@ -108,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (event.target.checked) {
         autorArr.push(book.autor);
         selectedBooks.push(book.name);
-        criteriaArr.forEach(criterum => {
+        criteriaArr.forEach((criterum) => {
           if (criterum) {
             criterum.currentCount += 1;
           }
@@ -116,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const count = {};
 
-        autorArr.forEach(autor => {
+        autorArr.forEach((autor) => {
           count[autor] = (count[autor] || 0) + 1;
           if (count[autor] > autorCriterium.count) {
             event.target.checked = false;
@@ -138,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
 
-    checkBoxes.forEach(checkbox => {
+    checkBoxes.forEach((checkbox) => {
       checkbox.addEventListener("change", handleCheckboxChange);
     });
   }
@@ -155,46 +208,44 @@ document.addEventListener("DOMContentLoaded", function() {
   function setupCopyButton() {
     const copyButton = document.getElementById("copyButton");
     if (copyButton) {
-      copyButton.addEventListener("click", function(e) {
-          e.preventDefault();
+      copyButton.addEventListener("click", function (e) {
+        e.preventDefault();
 
-          function copyListItems() {
-              const listItems = document.querySelectorAll("#bookSheet li");
-              let textToCopy = "";
+        function copyListItems() {
+          const listItems = document.querySelectorAll("#bookSheet li");
+          let textToCopy = "";
 
-              selectedBooks.forEach(item => {
-                  // Remove extra spaces and newlines
-                  textToCopy += item.trim() + "\n";
-              });
+          selectedBooks.forEach((item) => {
+            // Remove extra spaces and newlines
+            textToCopy += item.trim() + "\n";
+          });
 
-              // Remove last newline
-              textToCopy = textToCopy.trim();
+          // Remove last newline
+          textToCopy = textToCopy.trim();
 
-              // Create a temporary textarea element
-              const textarea = document.createElement('textarea');
-              textarea.value = textToCopy;
-              textarea.setAttribute('readonly', ''); // Make it readonly
-              textarea.style.position = 'absolute';
-              textarea.style.left = '-9999px'; // Move it outside of view
+          // Create a temporary textarea element
+          const textarea = document.createElement("textarea");
+          textarea.value = textToCopy;
+          textarea.setAttribute("readonly", ""); // Make it readonly
+          textarea.style.position = "absolute";
+          textarea.style.left = "-9999px"; // Move it outside of view
 
-              document.body.appendChild(textarea);
-              textarea.select();
-              
-              try {
-                  // Execute copy command
-                  document.execCommand('copy');
-                  document.body.removeChild(textarea);
-              } catch (err) {
-                  console.error('Failed to copy text:', err);
-              }
+          document.body.appendChild(textarea);
+          textarea.select();
+
+          try {
+            // Execute copy command
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+          } catch (err) {
+            console.error("Failed to copy text:", err);
           }
+        }
 
-          copyListItems();
-
+        copyListItems();
       });
     }
   }
-
 
   function submit() {
     const submitButton = document.getElementById("submitButton");
@@ -205,8 +256,8 @@ document.addEventListener("DOMContentLoaded", function() {
         let missingCriteria = [];
 
         function createSheet() {
-          selectedBooks.forEach(book => {
-            const listItem = document.createElement('li');
+          selectedBooks.forEach((book) => {
+            const listItem = document.createElement("li");
             listItem.className = "li2";
             listItem.innerHTML = `<label class="gridBook">${book}</label>`;
             listedBooks.push(listItem);
@@ -215,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         function checkCriteria() {
-          criteria.slice(0, -1).forEach(criterium => {
+          criteria.slice(0, -1).forEach((criterium) => {
             if (criterium.count <= criterium.currentCount) {
               // Criteria met
             } else {
@@ -224,11 +275,17 @@ document.addEventListener("DOMContentLoaded", function() {
             }
           });
 
-          if (/*missingCriteria.length === 0*/true) {
+          if (/*missingCriteria.length === 0*/ true) {
             if (selectedBooks.length > 20) {
-              drawAlert("Vyberte maximálně 20 knih. Aktuální počet vybraných knih:" + selectedBooks.length);
+              drawAlert(
+                "Vyberte maximálně 20 knih. Aktuální počet vybraných knih:" +
+                  selectedBooks.length
+              );
             } else if (selectedBooks.length < 1) {
-              drawAlert("Vyberte alespoň 1 knihu. Aktuální počet vybraných knih:" + selectedBooks.length);
+              drawAlert(
+                "Vyberte alespoň 1 knihu. Aktuální počet vybraných knih:" +
+                  selectedBooks.length
+              );
             } else {
               return true;
             }
@@ -243,14 +300,14 @@ document.addEventListener("DOMContentLoaded", function() {
             formAlreadysent = true;
             drawAlert("Tabulka byla úspěšně vytvořena", "green");
             createSheet();
-
+            drawPicked();
           } else if (formAlreadysent === true) {
-            listedBooks.forEach(listItem => {
+            listedBooks.forEach((listItem) => {
               listItem.remove();
-              
             });
             drawAlert("Tabulka byla úspěšně aktualizována", "green");
             createSheet();
+            drawPicked();
           } else {
             console.log("chyba v criteriaCheck");
           }

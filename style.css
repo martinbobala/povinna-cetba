@@ -24,7 +24,6 @@ body .header1 {
 body .header1 h1 {
   font-size: 23px;
   margin: 0px;
-  margin-left: 10px;
 }
 body h2 {
   width: 638px;
@@ -32,13 +31,13 @@ body h2 {
   margin-bottom: 5px;
   font-size: 17px;
 }
-body input[type=checkbox] {
+body input[type="checkbox"] {
   display: flex;
   align-self: center;
   position: relative;
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   height: 15px;
   width: 15px;
   background-color: rgb(36, 36, 36);
@@ -46,10 +45,10 @@ body input[type=checkbox] {
   border-color: rgb(152, 152, 152);
   border-radius: 4px;
 }
-body input[type=checkbox]:checked {
+body input[type="checkbox"]:checked {
   background-color: rgb(152, 152, 152);
 }
-body input[type=checkbox]::before {
+body input[type="checkbox"]::before {
   content: "";
   position: absolute;
   left: 4px;
@@ -61,7 +60,7 @@ body input[type=checkbox]::before {
   border-top: none;
   transform: rotate(45deg) scale(1);
 }
-body input[type=checkbox]:checked:before {
+body input[type="checkbox"]:checked:before {
   border-color: rgb(44, 44, 44);
   animation: checkAnim 0.2s ease;
 }
@@ -169,7 +168,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-background-clip: text;
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: rgb(235, 235, 235);
   -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: inset 0 0 20px 20px rgb(36, 36, 36);
@@ -246,7 +245,6 @@ input:-webkit-autofill:active {
   background-color: rgb(70, 70, 70);
   color: white;
   border: 0px solid rgb(98, 98, 98);
-
 }
 .inputdiv .data .submitButton:hover {
   background-color: rgb(98, 98, 98);
@@ -280,19 +278,19 @@ input:-webkit-autofill:active {
 }
 
 #info {
-  width: 638px;
-  margin-top: 20px;
-  color: rgb(152, 152, 152);
-  border: solid 1px rgb(152, 152, 152);
+  width: 634px;
+  margin-top: 5px;
+  background-color: rgba(52, 66, 77, 0);
+  border: solid 1px rgb(137, 137, 137);
   border-radius: 5px;
   display: flex;
   flex-direction: row;
-  font: "system-ui" 12px;
+  font-weight: 500;
   text-align: left;
 }
 #info #infoText {
-  margin-right: 15px;
-  margin-block: 15px;
+  margin-right: 13px;
+  margin-block: 13px;
 }
 #info #infoIcon {
   position: relative;
@@ -301,76 +299,85 @@ input:-webkit-autofill:active {
   margin-top: 20px;
 }
 #info .infoP {
-  margin-block: 2px;
+  margin: 10px;
   font-size: 14px;
+  font-weight: 500;
+  color: rgb(178, 178, 178);
 }
 #info .infoP::before {
   content: "• ";
 }
 #info #infoDot {
+  background-color: rgb(137, 137, 137);
   margin-inline: 15px;
   height: 16px;
   width: 16px;
-  border: solid 1px rgb(152, 152, 152);
   border-radius: 50%;
   display: inline-block;
 }
 #info #infoDot::after {
   content: "i";
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  color: rgb(152, 152, 152);
+  font-size: 9px;
+  color: rgb(52, 66, 77);
   position: absolute;
-  left: 23px;
+  left: 22px;
   top: 3px;
   width: 3px;
   height: 5px;
-}/*# sourceMappingURL=style.css.map */
+} /*# sourceMappingURL=style.css.map */
 
 .highlight {
-  border-color:rgb(255, 0, 0)!important;
+  border-color: rgb(255, 0, 0) !important;
   background-color: rgba(255, 0, 0, 0.478) !important;
   animation: shake 0.5s;
 }
 
 @keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-3px); }
-  50% { transform: translateX(3px); }
-  75% { transform: translateX(-3px); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
-#bookSheet{
-  
-  margin-inline: 25px;
-  padding-top: 0px;
-  border-bottom: solid 1px rgb(182, 182, 182);
-  font-size: 15px;
-  color: rgb(242, 242, 242)!important;
+#bookdiv {
+  display: none;
+  padding: 15px;
+  width: 608px;
+}
+.bookSheetStyle {
+  font-size: 14px;
+  border: solid 2px rgb(182, 182, 182);
+  border-top: 0px;
+  padding: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 #bookSheet .gridBook::before {
   content: "• ";
   margin-left: 5px;
-  
 }
 
-
-#bookdiv{
-  padding-block: 15px;
-}
-
-.li2{
-  border-inline: solid 1px rgb(182, 182, 182);
-  padding-block: 5px;
-}
-
-.h3{
-  font-size: 15px;
-  border: solid 1px rgb(182, 182, 182);
-  margin-top: 5px;
-  margin-bottom: 0px;
+.h3 {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  border: solid 2px rgb(182, 182, 182);
+  border-bottom: solid 1px;
+  margin-block: 0px;
   width: auto;
   padding: 10px;
 }
