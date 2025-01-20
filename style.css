@@ -278,7 +278,7 @@ input:-webkit-autofill:active {
 }
 
 #info {
-  width: 634px;
+  width: 630px;
   margin-top: 5px;
   background-color: rgba(52, 66, 77, 0);
   border: solid 1px rgb(137, 137, 137);
@@ -302,7 +302,7 @@ input:-webkit-autofill:active {
   margin: 10px;
   font-size: 14px;
   font-weight: 500;
-  color: rgb(178, 178, 178);
+  color: rgb(249, 249, 249);
 }
 #info .infoP::before {
   content: "• ";

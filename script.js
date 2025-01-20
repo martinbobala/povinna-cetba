@@ -275,13 +275,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           });
 
-          if (/*missingCriteria.length === 0*/ true) {
+          if (missingCriteria.length === 0) {
             if (selectedBooks.length > 20) {
               drawAlert(
                 "Vyberte maximálně 20 knih. Aktuální počet vybraných knih:" +
                   selectedBooks.length
               );
-            } else if (selectedBooks.length < 1) {
+            } else if (selectedBooks.length < 20) {
               drawAlert(
                 "Vyberte alespoň 1 knihu. Aktuální počet vybraných knih:" +
                   selectedBooks.length
