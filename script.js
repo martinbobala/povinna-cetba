@@ -125,6 +125,9 @@ document.addEventListener("DOMContentLoaded", function () {
         submitForm();
         setupCopyButton();
         canDraw = true;
+      })
+      .catch((error) => {
+        console.error("Chyba při načítání knih:", error);
       });
   }
 
@@ -138,10 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const book = getObjectByName(event.target.value, bookList);
       const genreCriterium = getObjectByName(book.genre, criteria);
       const categoryCriterium = getObjectByName(book.category, criteria);
-      const countCriterium = getObjectByName("počet knih", criteria);
       const autorCriterium = getObjectByName("autoři", criteria);
       const autorArr = autorCriterium.currentCount;
-      const criteriaArr = [genreCriterium, categoryCriterium, countCriterium];
 
       function removeData() {
         const index = autorArr.indexOf(book.autor);
@@ -151,21 +152,24 @@ document.addEventListener("DOMContentLoaded", function () {
           selectedBooks.splice(bookIndex, 1);
         }
 
-        criteriaArr.forEach((criterum) => {
-          if (criterum) {
-            criterum.currentCount -= 1;
-          }
-        });
+        if (genreCriterium) {
+          genreCriterium.currentCount -= 1;
+        }
+        if (categoryCriterium) {
+          categoryCriterium.currentCount -= 1;
+        }
       }
 
       if (event.target.checked) {
         autorArr.push(book.autor);
         selectedBooks.push(book.name);
-        criteriaArr.forEach((criterum) => {
-          if (criterum) {
-            criterum.currentCount += 1;
-          }
-        });
+
+        if (genreCriterium) {
+          genreCriterium.currentCount += 1;
+        }
+        if (categoryCriterium) {
+          categoryCriterium.currentCount += 1;
+        }
 
         const count = {};
 
@@ -256,6 +260,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let missingCriteria = [];
 
         function createSheet() {
+          // Seřazení knih podle čísel
+          selectedBooks.sort((a, b) => {
+            const numA = parseInt(a.match(/\d+/)[0]);
+            const numB = parseInt(b.match(/\d+/)[0]);
+            return numA - numB;
+          });
+
           selectedBooks.forEach((book) => {
             const listItem = document.createElement("li");
             listItem.className = "li2";
