@@ -220,25 +220,21 @@ document.addEventListener("DOMContentLoaded", function () {
           let textToCopy = "";
 
           selectedBooks.forEach((item) => {
-            // Remove extra spaces and newlines
             textToCopy += item.trim() + "\n";
           });
 
-          // Remove last newline
           textToCopy = textToCopy.trim();
 
-          // Create a temporary textarea element
           const textarea = document.createElement("textarea");
           textarea.value = textToCopy;
-          textarea.setAttribute("readonly", ""); // Make it readonly
+          textarea.setAttribute("readonly", "");
           textarea.style.position = "absolute";
-          textarea.style.left = "-9999px"; // Move it outside of view
+          textarea.style.left = "-9999px";
 
           document.body.appendChild(textarea);
           textarea.select();
 
           try {
-            // Execute copy command
             document.execCommand("copy");
             document.body.removeChild(textarea);
           } catch (err) {
@@ -260,7 +256,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let missingCriteria = [];
 
         function createSheet() {
-          // Seřazení knih podle čísel
           selectedBooks.sort((a, b) => {
             const numA = parseInt(a.match(/\d+/)[0]);
             const numB = parseInt(b.match(/\d+/)[0]);
@@ -294,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
               );
             } else if (selectedBooks.length < 20) {
               drawAlert(
-                "Vyberte alespoň 1 knihu. Aktuální počet vybraných knih:" +
+                "Vyberte 20 knih. Aktuální počet vybraných knih:" +
                   selectedBooks.length
               );
             } else {
